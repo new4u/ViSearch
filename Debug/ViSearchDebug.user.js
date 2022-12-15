@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         ViSearch
-// @namespace    https://github.com/new4u/ViSearch/
+// @namespace    https://github.com/new4u/
 // @version      0.1
 // @description  try to take over the world!
 // @author      new4u

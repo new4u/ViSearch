@@ -1,4 +1,4 @@
-# DDsearch
+# ViSearch
 A repo for visualizing all searching results, help finding the 1
 # Connect data of the whole world
 
@@ -20,7 +20,7 @@ A repo for visualizing all searching results, help finding the 1
 
 Please submit your updates through pull request, by following the instructions below:
 
-      1. git clone https://github.com/new4u/DDsearch.git
+      1. git clone https://github.com/new4u/ViSearch.git
       2. git checkout -b <your branch name>
       3. git add . 
       4. git commit -m "<commit message>"

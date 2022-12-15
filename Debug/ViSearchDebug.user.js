@@ -17,8 +17,8 @@
 // @require     http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js
 // @resource    http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css
 // @grant        none
-// @require     https://github.com/new4u/ViSearch/blob/68238effb8f81c4b4a86136dbbf0d4c9c774b618/ViSearch.js#L3
-// @updateURL   
+// @require     https://github.com/new4u/ViSearch/blob/01626cb0feb47f770642c579da387e1cd23f9e79/Debug/ViSearchDebug.user.js
+// @updateURL   https://github.com/new4u/ViSearch/blob/01626cb0feb47f770642c579da387e1cd23f9e79/Debug/ViSearchDebug.user.js
 // ==/UserScript==
 
 let styleSheet = `

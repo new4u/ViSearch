@@ -295,6 +295,8 @@ s.innerHTML = styleSheet;
         });
 
         console.log(dataPage);
+        // todo #10
+
         // let dataPageString = JSON.stringify(resultPages);
         // let dataPage = JSON.parse(dataPageString);
 

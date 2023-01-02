@@ -1,28 +1,29 @@
 # ViSearch
-A repo for visualizing all searching results, help finding the 1
-# Connect data of the whole world
 
-## This repo does two things
+A user script on tampermonkey for visualizing searching results, help finding more insights of the search results.
 
-1. Data extraction and mining
-   
-    Analyze the relation between data
+## This repo does following things
 
-2. Data visualization
+1. Data retrieval
+
+    Retrive data from search engines such as google,baidu
+
+2. Data mining
+
+    Analyze the relation between search results
+
+3. Data visualization
 
     Visualize the relation
-    
-3. Evolution route
-
-   Java-》Node.js+puppeteer+D3.js-》D3.js+Userscript
 
 ## How to contribute
 
 Please submit your updates through pull request, by following the instructions below:
 
       1. git clone https://github.com/new4u/ViSearch.git
-      2. git checkout -b <your branch name>
-      3. git add . 
-      4. git commit -m "<commit message>"
-      5. git push origin head
-      6. Create the PR at github.com
+      2. [optional] git checkout <objective branch, generally it is main>
+      3. git checkout -b <your branch name>
+      4. git add . 
+      5. git commit -m "<commit message>"
+      6. git push origin head
+      7. Create the PR at github.com

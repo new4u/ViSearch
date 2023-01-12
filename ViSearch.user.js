@@ -215,11 +215,11 @@ $(document).ready(function () {
     // simulation.alphaDecay(0.05) // 衰减系数，值越大，图表稳定越快
     simulation.force('charge')
         .strength(-forceRate) // 排斥力强度，正值相互吸引，负值相互排斥
-    // simulation.force('link')
-    //     .id(d => d.id) // set id getter
-    //     .distance(100) // 连接距离
-    //     .strength(1) // 连接力强度 0 ~ 1
-    //     .iterations(1) // 迭代次数
+    simulation.force('link')
+        .id(d => d.id) // set id getter
+        .distance(100) // 连接距离
+        .strength(1) // 连接力强度 0 ~ 1
+        .iterations(1) // 迭代次数
 
 
     //    <!--    loading data-->

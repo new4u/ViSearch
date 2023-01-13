@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         ViSearch/baiduData
+// @name         ViSearch/baiduData 0.11 
 // @namespace    http://tampermonkey.net/
 // @version      0.1
 // @description  try to take over the world!
@@ -195,7 +195,7 @@ $(document).ready(function () {
     var types = ['中心文章', '分段', '关键分词', '搜索结果'];
     var colors = ['#6ca46c', '#4e88af', '#c72eca', '#d2907c'];
     //临时大小控制
-    var sizes = [30, 5, 10, 2.5];
+    var sizes = [15, 5, 10, 2.5];
 
 
     var forceRate = 50;
@@ -212,14 +212,14 @@ $(document).ready(function () {
     .force("center", d3.forceCenter(width / 2, height / 2));
 
     //试着改变力图的nodes吸引力和排斥力
-    simulation.alphaDecay(0.05) // 衰减系数，值越大，图表稳定越快
+    // simulation.alphaDecay(0.05) // 衰减系数，值越大，图表稳定越快
     simulation.force('charge')
         .strength(-forceRate) // 排斥力强度，正值相互吸引，负值相互排斥
-    simulation.force('link')
-        .id(d => d.id) // set id getter
-        .distance(100) // 连接距离
-        .strength(1) // 连接力强度 0 ~ 1
-        .iterations(1) // 迭代次数
+    // simulation.force('link')
+    //     .id(d => d.id) // set id getter
+    //     .distance(100) // 连接距离
+    //     .strength(1) // 连接力强度 0 ~ 1
+    //     .iterations(1) // 迭代次数
 
 
     //    <!--    loading data-->
@@ -305,7 +305,6 @@ $(document).ready(function () {
     let keyWords = []
     for (let i in dataPage) {
         let temp = dataPage[i].keyWords;
-        console.log("temp:"+temp);
         keyWords = keyWords.concat(temp)
     }
     let keyWordsSet = Array.from(new Set(keyWords))
@@ -410,7 +409,7 @@ $(document).ready(function () {
     }
 
     let tagid = id
-    //2,tag,id=20000-29999,
+    //2,tag,id=20000-29999,tag就是长度大于4的keywordsSet
     let tagNode = [];
     for (let i = 0; i < keyWordsSet.length; i++) {
         if (keyWordsSet[i].length > 4) {
@@ -545,7 +544,7 @@ $(document).ready(function () {
         var xys = [];
         var typeString = "." + type;
         var size = d3.selectAll(typeString.toString())._groups[0].length
-        var r1 = r1 * size * ratio;
+        var r = r * size * ratio;
         for (var i = 0; i < size; i++) {
             //圆心坐标
             var x = width / 2, y = height / 2;
@@ -689,52 +688,52 @@ function dragended(d) {
     dragging = false;
 }
 
-$('#mode span').click(function (event) {
-    //     //    span all set to inactive state
-    //     $('#mode span').removeClass('active');
-    //     //    the clicked span activaed
-    //     $(this).addClass('active');
-    //     //    text hide nodes display
-    //     if ($(this).text() === '节点') {
-    //         $('.texts' && 'text').hide();
-    //         $('.nodes' && 'circle').show();
-    //     } else {
-    //         $('texts' && 'text').show();
-    //         $('.nodes' && 'circle').hide();
-    //     }
-    // })
+// $('#mode span').click(function (event) {
+//     //     //    span all set to inactive state
+//     //     $('#mode span').removeClass('active');
+//     //     //    the clicked span activaed
+//     //     $(this).addClass('active');
+//     //     //    text hide nodes display
+//     //     if ($(this).text() === '节点') {
+//     //         $('.texts' && 'text').hide();
+//     //         $('.nodes' && 'circle').show();
+//     //     } else {
+//     //         $('texts' && 'text').show();
+//     //         $('.nodes' && 'circle').hide();
+//     //     }
+//     // })
 
 
 
-    //搜索框中输入内容则响应该事件
-    // keyup按键敲击响应event
-    $('#search1 input').keyup(function (event) {
-        console.log($(this).val());
-        if ($(this).val() == '') {
-            d3.select('#svg .texts').selectAll('text').attr('class', '');
-            d3.select('#svg .nodes').selectAll('circle').attr('class', '');
-            d3.select('#svg .links').selectAll('line').attr('class', '');
-        } else {
-            var name = $(this).val();
-            d3.select('#svg .nodes').selectAll('circle').attr('class', function (d) {
-                if (d.id.toLowerCase().indexOf(name.toLowerCase()) >= 0) {
-                    return '';
-                } else {
-                    return 'inactive';
-                }
-            });
-            d3.select('#svg .texts').selectAll('text').attr('class', function (d) {
-                if (d.id.toLowerCase().indexOf(name.toLowerCase()) >= 0) {
-                    return '';
-                } else {
-                    return 'inactive';
-                }
-            });
-            d3.select("#svg .links").selectAll('line').attr('class', function (d) {
-                return 'inactive';
-            });
-        }
-    });
-});
+//     //搜索框中输入内容则响应该事件
+//     // keyup按键敲击响应event
+//     $('#search1 input').keyup(function (event) {
+//         console.log($(this).val());
+//         if ($(this).val() == '') {
+//             d3.select('#svg .texts').selectAll('text').attr('class', '');
+//             d3.select('#svg .nodes').selectAll('circle').attr('class', '');
+//             d3.select('#svg .links').selectAll('line').attr('class', '');
+//         } else {
+//             var name = $(this).val();
+//             d3.select('#svg .nodes').selectAll('circle').attr('class', function (d) {
+//                 if (d.id.toLowerCase().indexOf(name.toLowerCase()) >= 0) {
+//                     return '';
+//                 } else {
+//                     return 'inactive';
+//                 }
+//             });
+//             d3.select('#svg .texts').selectAll('text').attr('class', function (d) {
+//                 if (d.id.toLowerCase().indexOf(name.toLowerCase()) >= 0) {
+//                     return '';
+//                 } else {
+//                     return 'inactive';
+//                 }
+//             });
+//             d3.select("#svg .links").selectAll('line').attr('class', function (d) {
+//                 return 'inactive';
+//             });
+//         }
+//     });
+// });
 // });
 });

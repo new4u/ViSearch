@@ -168,10 +168,22 @@ s.type = "text/css";
 s.innerHTML = styleSheet;
 (document.head || document.documentElement).appendChild(s);
 
+let button = document.createElement("button");
+button.setAttribute("id", "load-button");
+button.innerHTML = "lets ViSearch";
+
+document.body.appendChild(button);
+
 // window.addEventListener('load', function() {   //是否可以listen别的
 // window.addEventListener('scroll', function() {  //改成滚动的时候就触发？或者滚动多次
+// window.addEventListener('scroll', function() {
+//   if (document.body.scrollHeight == document.body.scrollTop + window.innerHeight) {
+button.addEventListener("click", function() {
+//相当于初始化d3.js中的d3.select(...)函数可以用来选择页面中的元素，而.remove()方法可以用来删除选中的元素。因此在重新渲染之前，可以使用这些方法来删除之前渲染的元素。
+        d3.selectAll("svg > *").remove();
 
 
+console.log("lets ViSearch");
 const xmlns = "http://www.w3.org/2000/svg";
 const width=800;
 const height=560;
@@ -180,10 +192,9 @@ svg1.setAttributeNS(null,'id',"svg1");
 svg1.setAttributeNS(null,"width",width);
 svg1.setAttributeNS(null,"height",height);
 
-
 svg1.innerHTML = '<svg width="800" height="560" style="margin-left:80px;margin-bottom:-40px;" id="svg"></svg><div id="indicator"></div><div id="mode"><span class="active" style="border-top-right-radius: 0;border-bottom-right-radius:0;">节点</span><span style="border-top-left-radius:0;border-bottom-left-radius:0;position: relative;left: -5px">文字</span></div><div id="search1"><input type="text" class="form-control"></div><div id="info"><h4></h4></div></div>';
-document.body.insertBefore(svg1, document.body.firstChild);//放在头部
-// document.body.insertBefore(svg1, document.body.lastChild);//放在尾部
+// document.body.insertBefore(svg1, document.body.firstChild);//放在头部
+document.body.insertBefore(svg1, document.body.lastChild);//放在尾部
 
 $(document).ready(function () {
     var svg = d3.select("#svg"),
@@ -226,14 +237,13 @@ $(document).ready(function () {
 
 
     //    <!--    loading data-->
-    var graph;
+   let data={};
+    var graph={};
     // d3.json("new.json", function (error, data) {
     // d3.json("nodesAndLinks.json", function (error, data) {
     // if (error) throw error;
 
     // 不需要“”括起来，但是最后要用分号；
-
-// window.addEventListener('scroll', function() { //本想每次滑动滚轮就更新data和d3，好像不行
 
     //***开始解析网页
 
@@ -464,7 +474,7 @@ $(document).ready(function () {
     //    合并4个[],用concat(),
     nodes = nodes.concat(newsNode).concat(tagNode).concat(keyNode).concat(sanNode);
     // console.log("nodes", nodes, "links", links);
-    let data = { 'nodes': nodes, 'links': links };
+    data = { 'nodes': nodes, 'links': links };
     console.log(data)
 
 

@@ -212,7 +212,7 @@ $(document).ready(function () {
     .force("center", d3.forceCenter(width / 2, height / 2));
 
     //试着改变力图的nodes吸引力和排斥力
-    // simulation.alphaDecay(0.05) // 衰减系数，值越大，图表稳定越快
+    simulation.alphaDecay(0.05) // 衰减系数，值越大，图表稳定越快
     simulation.force('charge')
         .strength(-forceRate) // 排斥力强度，正值相互吸引，负值相互排斥
     simulation.force('link')

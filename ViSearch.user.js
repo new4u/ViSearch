@@ -194,7 +194,8 @@ $(document).ready(function () {
     //        alter:define the (category)
     var types = ['中心文章', '分段', '关键分词', '搜索结果'];
     var colors = ['#6ca46c', '#4e88af', '#c72eca', '#d2907c'];
-    //临时大小控制
+    //临时半径R大小控制,之后改成连接数量影响大小
+
     var sizes = [15, 5, 10, 2.5];
 
 

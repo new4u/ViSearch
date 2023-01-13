@@ -168,8 +168,20 @@ s.type = "text/css";
 s.innerHTML = styleSheet;
 (document.head || document.documentElement).appendChild(s);
 
-window.addEventListener('load', function() {   //是否可以listen别的
+// window.addEventListener('load', function() {   //是否可以listen别的
 // window.addEventListener('scroll', function() {  //改成滚动的时候就触发？或者滚动多次
+let timeoutId;
+
+window.addEventListener('scroll', function() {
+  if (document.body.scrollHeight == 
+    document.body.scrollTop + window.innerHeight) {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(function() {
+      // load next page data
+    }, 200);
+ //这段代码通过 addEventListener 监听滚动事件, 当用户滚动到页面底部时, 会触发事件. 但是，我们会使用 setTimeout 函数将加载下一页数据的代码延迟 200ms 执行。这样就能避免用户短时间内多次滚动到底部而触发多次请求的问题。
+//要注意的是，由于 setTimeout 的执行有可能会被用户再次滚动所打断，因此需要在每次触发时都清除上一次的 timeoutId。
+
 const xmlns = "http://www.w3.org/2000/svg";
 const width=800;
 const height=560;

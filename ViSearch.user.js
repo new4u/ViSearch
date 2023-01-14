@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         ViSearch/baiduData 0.11
+// @name         ViSearch/baiduData 0.11 2023-1-14 23:31:03 加了一些界面的优化，首页按钮点击显示可视化
 // @namespace    http://tampermonkey.net/
 // @version      0.1
 // @description  try to take over the world!
@@ -29,15 +29,15 @@
 // ==/UserScript==
 let styleSheet = `
 body {
-    background-color: #272b30;
+    // background-color: #272b30;
     padding: 30px 40px;
-    text-align: center;
+    // text-align: center;
     font-family: OpenSans-Light, PingFang SC, Hiragino Sans GB, Microsoft Yahei, Microsoft Jhenghei, sans-serif;
 }
 
 .links line {
-    stroke: rgb(240, 240, 240);
-    stroke-opacity: 0.2;
+    stroke: rgb(255, 255, 255);
+    stroke-opacity: 0.5;
 }
 
 .links line.inactive {
@@ -162,46 +162,102 @@ body {
     stroke: #fff;
 }
 `;
-
+const xmlns = "http://www.w3.org/2000/svg";
+const width=800;
+const height=560;
 let s = document.createElement('style');
 s.type = "text/css";
 s.innerHTML = styleSheet;
 (document.head || document.documentElement).appendChild(s);
 
-let button = document.createElement("button");
-button.setAttribute("id", "load-button");
-button.innerHTML = "lets ViSearch";
+// let button = document.createElement("button");
+// button.setAttribute("id", "load-button");
+// button.innerHTML = "Lets Visearch";
 
+// document.body.appendChild(button);
+
+//把按钮也搬到浮动右侧
+let button = document.createElement("button");
+button.innerHTML = "Show SVG";
+button.style.cssText = "position: fixed; top: 0; right: 0; z-index: 999; width: 100px; height: 50px; background-color: green; color: white; font-size: 20px;";
+
+button.addEventListener("click", function(){
+    var div = d3.select("body").append("div")
+    .style("position", "fixed")
+    .style("top", "50px")
+    .style("right", "0")
+    .style("z-index", "999")
+    // .style("background-color", "rgba(255, 255, 255, 0.5)")
+    .style("background-color", "rgba(0, 0, 0, 0.5)")
+    .style("padding", "20px")
+    .style("width", "40%")
+    .style("height", "80%")
+    .style("overflow", "auto")
+    .style("border-radius", "10px")
+    .style("box-shadow", "0 0 10px #ccc")
+    .on("click", function(){
+        d3.select(this).style("display", "none");
+    });
+    div.append(svg.node())
+});
 document.body.appendChild(button);
+
+
 
 // window.addEventListener('load', function() {   //是否可以listen别的
 // window.addEventListener('scroll', function() {  //改成滚动的时候就触发？或者滚动多次
 // window.addEventListener('scroll', function() {
 //   if (document.body.scrollHeight == document.body.scrollTop + window.innerHeight) {
+
+//按键响应
 button.addEventListener("click", function() {
 //相当于初始化d3.js中的d3.select(...)函数可以用来选择页面中的元素，而.remove()方法可以用来删除选中的元素。因此在重新渲染之前，可以使用这些方法来删除之前渲染的元素。
-        d3.selectAll("svg > *").remove();
-
+d3.selectAll("svg > *").remove();
 
 console.log("lets ViSearch");
-const xmlns = "http://www.w3.org/2000/svg";
-const width=800;
-const height=560;
-var svg1 = document.createElementNS(xmlns, "svg");
-svg1.setAttributeNS(null,'id',"svg1");
-svg1.setAttributeNS(null,"width",width);
-svg1.setAttributeNS(null,"height",height);
 
-svg1.innerHTML = '<svg width="800" height="560" style="margin-left:80px;margin-bottom:-40px;" id="svg"></svg><div id="indicator"></div><div id="mode"><span class="active" style="border-top-right-radius: 0;border-bottom-right-radius:0;">节点</span><span style="border-top-left-radius:0;border-bottom-left-radius:0;position: relative;left: -5px">文字</span></div><div id="search1"><input type="text" class="form-control"></div><div id="info"><h4></h4></div></div>';
-// document.body.insertBefore(svg1, document.body.firstChild);//放在头部
-document.body.insertBefore(svg1, document.body.lastChild);//放在尾部
+// var svg1 = document.createElementNS(xmlns, "svg");
+// svg1.setAttributeNS(null,'id',"svg1");
+// svg1.setAttributeNS(null,"width",width);
+// svg1.setAttributeNS(null,"height",height);
+
+// svg1.innerHTML = '<svg width="800" height="560" style="margin-left:80px;margin-bottom:-40px;" id="svg"></svg><div id="indicator"></div><div id="mode"><span class="active" style="border-top-right-radius: 0;border-bottom-right-radius:0;">节点</span><span style="border-top-left-radius:0;border-bottom-left-radius:0;position: relative;left: -5px">文字</span></div><div id="search1"><input type="text" class="form-control"></div><div id="info"><h4></h4></div></div>';
+// // document.body.insertBefore(svg1, document.body.firstChild);//放在头部
+// document.body.insertBefore(svg1, document.body.lastChild);//放在尾部
+
+//     let svg1 = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+// svg1.setAttribute("width", width);
+// svg1.setAttribute("height",height );
+// svg1.style.cssText = "float: right;";
+// document.body.appendChild(svg1);
 
 $(document).ready(function () {
-    var svg = d3.select("#svg"),
-        width = svg.attr("width"),
-        height = svg.attr("height");
+    // var svg = d3.select("#svg"),
+    //     width = svg.attr("width"),
+    //     height = svg.attr("height");
 
-    //remember its, not . var svg from d3,width,height from svg
+    //无按钮的添加一层
+    var svg = d3.select("body").append("svg")
+        .attr("width", "50%")
+        .attr("height", "100%")
+        .style("position", "fixed")
+        .style("top", "0")
+        .style("right", "0")
+        .style("z-index", "999")
+        // .style("background-color", "rgba(255, 255, 255, 0.5)") //白色底
+        // .style("background-color", "rgba(0, 0, 0, 0)") //黑色底
+        // .style("transition", "opacity 2s")
+        // .on("mouseover", function() {
+        //     d3.select(this).style("opacity", "0.5")
+        // })
+        // .on("mouseout", function() {
+        //     d3.select(this).style("opacity", "0")
+        // });
+
+    //渐进的效果
+
+
+    //     //remember its, not . var svg from d3,width,height from svg
 
     // console.log(svg);
     //        alter:define the (category)
@@ -226,18 +282,18 @@ $(document).ready(function () {
     .force("center", d3.forceCenter(width / 2, height / 2));
 
     //试着改变力图的nodes吸引力和排斥力
-    simulation.alphaDecay(0.05) // 衰减系数，值越大，图表稳定越快
+    // simulation.alphaDecay(0.05) // 衰减系数，值越大，图表稳定越快
     simulation.force('charge')
-        .strength(-forceRate) // 排斥力强度，正值相互吸引，负值相互排斥
-    simulation.force('link')
-        .id(d => d.id) // set id getter
-        .distance(100) // 连接距离
-        .strength(1) // 连接力强度 0 ~ 1
-        .iterations(1) // 迭代次数
+        // .strength(-forceRate) // 排斥力强度，正值相互吸引，负值相互排斥
+    // simulation.force('link')
+    //     .id(d => d.id) // set id getter
+    //     .distance(100) // 连接距离
+    //     .strength(1) // 连接力强度 0 ~ 1
+    //     .iterations(1) // 迭代次数
 
 
     //    <!--    loading data-->
-   let data={};
+    let data={};
     var graph={};
     // d3.json("new.json", function (error, data) {
     // d3.json("nodesAndLinks.json", function (error, data) {
@@ -442,7 +498,7 @@ $(document).ready(function () {
                         target: keyNode[j].id,
                         value: 1
                     }
-                                )
+                              )
                 }
             }
         }
@@ -525,9 +581,9 @@ $(document).ready(function () {
 
     // set drag event
     .call(d3.drag()
-            .on("start", dragstarted)
-            .on("drag", dragged)
-            .on("end", dragended));
+          .on("start", dragstarted)
+          .on("drag", dragged)
+          .on("end", dragended));
 
     //固定中心文章位置,用class来控制
     //固定中心文章位置,fx可以设置哈哈,或者大面积的可以用tick,详见https://stackoverflow.com/questions/10392505/fix-node-position-in-d3-force-directed-layout,实验证明,还可以用type属性来控制fx,fy
@@ -628,10 +684,10 @@ $(document).ready(function () {
     })
     .attr("text-anchor", "middle")
     .call(d3.drag()
-            .on("start", dragstarted)
-            .on("drag", dragged)
-            .on("end", dragended)
-            );
+          .on("start", dragstarted)
+          .on("drag", dragged)
+          .on("end", dragended)
+         );
 
     //圆增加title...
     node.append("title").text(function (d) {
@@ -711,8 +767,8 @@ function dragended(d) {
 //     //         $('.texts' && 'text').hide();
 //     //         $('.nodes' && 'circle').show();
 //     //     } else {
-            $('texts' && 'text').show();
-            $('.nodes' && 'circle').hide();
+// $('texts' && 'text').show();
+// $('.nodes' && 'circle').hide();
 //     //     }
 //     // })
 

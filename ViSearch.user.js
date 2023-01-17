@@ -777,7 +777,9 @@ function dragended(d) {
 //     //     }
 //     // })
 
-
+//暂时可以使用注释以下两行代码显示文字，或者circle
+// $('texts' && 'text').show();
+// $('.nodes' && 'circle').hide();
 
 //     //搜索框中输入内容则响应该事件
 //     // keyup按键敲击响应event

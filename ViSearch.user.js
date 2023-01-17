@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         ViSearch/baiduData 0.11 2023-1-14 23:31:03 加了一些界面的优化，首页按钮点击显示可视化
+// @name         ViSearch/baiduData 0.13 2023-1-17 16:41:39 bugfix can drag circle(function(drag) must define before in userscript)
 // @namespace    http://tampermonkey.net/
 // @version      0.1
 // @description  try to take over the world!
@@ -281,15 +281,42 @@ $(document).ready(function () {
     //centre setting up
     .force("center", d3.forceCenter(width / 2, height / 2));
 
-    //试着改变力图的nodes吸引力和排斥力
+    // //试着改变力图的nodes吸引力和排斥力
     // simulation.alphaDecay(0.05) // 衰减系数，值越大，图表稳定越快
-    simulation.force('charge')
-        // .strength(-forceRate) // 排斥力强度，正值相互吸引，负值相互排斥
+    // simulation.force('charge')
+    //     .strength(-forceRate) // 排斥力强度，正值相互吸引，负值相互排斥
     // simulation.force('link')
     //     .id(d => d.id) // set id getter
     //     .distance(100) // 连接距离
     //     .strength(1) // 连接力强度 0 ~ 1
     //     .iterations(1) // 迭代次数
+
+    //added a var
+var dragging = false;
+
+// dragXXX related
+function dragstarted(d) {
+    if (!d3.event.active) simulation.alphaTarget(0.3).restart();
+    d.fx = d.x;
+    d.fy = d.y;
+    dragging = true;
+
+}
+
+function dragged(d) {
+    d.fx = d3.event.x;
+    d.fy = d3.event.y;
+}
+
+function dragended(d) {
+    //            alphaTarget(num)是啥意思啊,d里面的fx,fy是下一刻的x,y吗?
+    if (!d3.event.active) simulation.alphaTarget(0);
+    d.fx = null;
+    d.fy = null;
+    dragging = false;
+}
+
+// todo #23 make the function above defined ahead ! As the userscript migration notice! https://github.dev/new4u/ViSearch/blob/4687c34a92b76ef9940162177606f2838aede93f/ViSearch.user.js#L295-L317
 
 
     //    <!--    loading data-->
@@ -729,33 +756,9 @@ $(document).ready(function () {
         });
     }
 
-    //    未完待续... xampp for cross origin requests
 
 });
-//added a var
-var dragging = false;
 
-// dragXXX related
-function dragstarted(d) {
-    if (!d3.event.active) simulation.alphaTarget(0.3).restart();
-    d.fx = d.x;
-    d.fy = d.y;
-    dragging = true;
-
-}
-
-function dragged(d) {
-    d.fx = d3.event.x;
-    d.fy = d3.event.y;
-}
-
-function dragended(d) {
-    //            alphaTarget(num)是啥意思啊,d里面的fx,fy是下一刻的x,y吗?
-    if (!d3.event.active) simulation.alphaTarget(0);
-    d.fx = null;
-    d.fy = null;
-    dragging = false;
-}
 
 // $('#mode span').click(function (event) {
 //     //     //    span all set to inactive state

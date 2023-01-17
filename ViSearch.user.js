@@ -25,6 +25,8 @@
 // @require     http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js
 // @require     http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js
 // @resource    http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css
+// @updateURL    https://raw.githubusercontent.com/new4u/ViSearch/master/ViSearch.user.js
+// @downloadURL  https://raw.githubusercontent.com/new4u/ViSearch/master/ViSearch.user.js
 // @grant        none
 // ==/UserScript==
 let styleSheet = `

@@ -22,6 +22,7 @@
 // @match        *www.google.com*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=codechef.com
 // @require     https://d3js.org/d3.v4.js
+// @require     https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.min.js
 // @require     http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js
 // @require     http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js
 // @resource    http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css
@@ -234,6 +235,7 @@ button.addEventListener("click", function () {
     // document.body.appendChild(svg1);
 
     $(document).ready(function () {
+        $(".d3-tip").remove();
         // var svg = d3.select("#svg"),
         //     width = svg.attr("width"),
         //     height = svg.attr("height");
@@ -292,6 +294,15 @@ button.addEventListener("click", function () {
         //     .distance(100) // 连接距离
         //     .strength(1) // 连接力强度 0 ~ 1
         //     .iterations(1) // 迭代次数
+        // Set up tooltip
+        var tip = d3.tip()
+            .attr('class', 'd3-tip')
+            .offset([-10, 0])
+            .html(function (d) {
+                return d.name + "</span>";
+            })
+        svg.call(tip);
+
 
         //added a var
         var dragging = false;
@@ -572,7 +583,6 @@ button.addEventListener("click", function () {
         //d3 mapping data to html,make line with = 1
         //    links
         var link = svg.append("g")
-
             .attr("class", "links")
             .selectAll("line")
             .data(graph.links)
@@ -598,7 +608,7 @@ button.addEventListener("click", function () {
             })
             .attr("fill", function (d) {
                 //    配合现在category从1开始,今后可以重新设计一下category make color of node circle,也可以加到后面,统一修改
-                console.log(d.category);
+                // console.log(d.category);
                 return colors[d.category - 1];
 
             })
@@ -687,38 +697,126 @@ button.addEventListener("click", function () {
             d.fy = obj.py;
         });
 
-        //san文章点击, 没有name这个?
+        //san文章点击, 没有name这个
+        //存放三度文章size
+        var sansize = [];
+
+        var year = 0;
+        var year_index = 0;
+        //计算连接数
         svg.selectAll(".san")
+            .attr("r", function (d) {
+                var uniqueWords = new Set(d.keyWords);
+                // console.log(uniqueWords.size);
+                return uniqueWords.size * 3
+
+            })
             .attr("type", function (d, i) {
-                var obj = sanXys[i];
-                var url = d.url;
-                if (url) {
-                    // 根据time进行布局
-                    d.name = "<a style=font-size:12pt href='" + d.url + "' target='_blank'>" + d.time + "-  " + d.name + "</a>";
+
+                if (d.url) {
+                    //			d.name = "<a style=font-size:12pt href='"+d.url+"' target='_blank'>"+d.year+"-"+d.month+"  "+d.name+"</a>";
+                    d.name = "<a href='" + d.url + "' target='_blank'>" + d.time + "-" + d.origin + "  " + d.name + "</a>";
+
                 }
-            });
-        // //san文章,GPT学习.tag的固定段落位置, 将下列代码补全,将.san的node根据data.time进行布局, time接近现在的较靠屏幕上方(time数据示例:time: "23小时前" 或者 time: "2023年1月8日 "), 同时将time为空的通通放在graph的底部
-        // svg.selectAll(".san")
-        //     .attr("type", function (d, i) {
-        //         var obj = sanXys[i];
-        //         var time = d.time;
-        //         if (time) {
-        //             // 根据time进行布局
-        //             var now = new Date();
-        //             var date = new Date(time);
-        //             var diff = now - date;
-        //             console.log("now,date,diff",now,date,diff) //time数据示例:time: "23小时前" 或者 time: "2023年1月8日 ",1.需要将中文的time转换成可以计算的. 2.console.log now,data,diff这三个量,并且告诉我哪个是哪个
-        //             var linear = d3.scaleLinear()
-        //                 .domain([0, now])
-        //                 .range([0, height]);
-        //             d.fx = obj.px;
-        //             d.fy = linear(diff);
-        //         } else {
-        //             // time为空的放在底部
-        //             d.fx = obj.px;
-        //             d.fy = height;
+            })
+
+
+
+
+        // var sansortsizeIndex = [];
+        // var sansortsize = { min: 1, mid: 1, max: 1 };
+        // var minSize = d3.min(sansize); //最小值
+        // var maxSize = d3.max(sansize);
+        // //判断最小值
+        // var min_index = 0;
+        // var mid_index = 0;
+        // var max_index = 0;
+        // for (var i in sansize) {
+        //     if (sansize[i] <= (minSize + (maxSize - minSize) * 0.5)) { //50%以下在外圈
+        //         sansortsizeIndex.push({ type: 'min', index: min_index });
+        //         sansortsize.min += 1;
+        //         min_index++;
+        //     } else if (sansize[i] >= (maxSize - (maxSize - minSize) * 0.2)) { //20%以上在里圈
+        //         sansortsizeIndex.push({ type: 'max', index: max_index });
+        //         sansortsize.max += 1;
+        //         max_index++;
+        //     } else {
+        //         sansortsizeIndex.push({ type: 'mid', index: mid_index });
+        //         sansortsize.mid += 1;
+        //         mid_index++;
+        //     }
+        // }
+        //     function getXYS3(r, ratio, size) {
+        //         var xys3 = [];
+
+        //         for (var i = 0; i < size; i++) {
+        //             //圆心坐标
+        //             var x = width / 2, y = height / 2;
+        //             // 计算弧度
+        //             var rad = i * 2 * Math.PI / size + Math.PI / 2;
+
+        //             // r*Math.cos(rad) 弧线的终点相对dot的水平偏移
+        //             // r*Math.sin(rad) 弧线的终点相对dot的垂直偏移
+        //             // compressionRatio 垂直压缩比例
+        //             x_ = ratio * r * Math.sin(rad) + x;
+        //             y_ = -r * Math.cos(rad) + y;
+        //             xys3.push({
+        //                 px: x_,
+        //                 py: y_
+        //             });
         //         }
-        //     });
+
+        //         return xys3;
+        //     }
+        // var sanXys = {};
+        // sanXys.min = getXYS3((height / 2 - 150) / 3 * 3 + 100, width / height, sansortsize['min']);
+        // sanXys.mid = getXYS3((height / 2 - 150) / 3 * 2 + 100, width / height, sansortsize['mid']);
+        // sanXys.max = getXYS3((height / 2 - 150) / 3 * 1 + 100, width / height, sansortsize['max']);
+
+
+
+        //如果url不为空，把node的半径扩充成原来的三倍
+        // svg.selectAll(".san")
+        // .attr("r", function(d) {
+        //     if (d.url) {
+        //         return d3.select(this).attr("r") * 3;
+        //     } else {
+        //         return d3.select(this).attr("r");
+        //     }
+        // });
+
+        // //san文章,GPT学习.tag的固定段落位置, 将下列代码补全,将.san的node根据data.time进行布局, time接近现在的较靠屏幕上方(time数据示例:time: "23小时前" 或者 time: "2023年1月8日 "), 同时将time为空的通通放在graph的底部
+        // var now = new Date();
+        // var sanNodes = svg.selectAll(".san")
+        // .attr("type", function (d, i) {
+        // var obj = sanXys[i]
+        // // 计算时间差
+        // var time = d.time;
+        // var diff;
+        // if (time.indexOf("小时前") != -1) {
+        // diff = -time.split("小时前")[0];
+        // } else if (time.indexOf("年") != -1) {
+        // var date = new Date(time);
+        // diff = (now - date) / 1000 / 60 / 60 / 24;
+        // } else {
+        // diff = 0;
+        // }
+        // console.log(now,data,diff)
+        // // 设置y坐标
+        // var linear = d3.scaleLinear()
+        // .domain([-30, 0])
+        // .range([0, height - 20]);
+        // d.fy = linear(diff);
+        // });
+
+        // console.log("now 是当前时间的时间戳，data 是节点的数据，diff 是时间差，表示距离当前时间的天数，负数表示过去的天数，正数表示未来的天数。")
+        // // 将time为空的节点放在底部
+        // sanNodes.filter(function (d) { return !d.time; }).attr("fy", height);
+
+
+
+
+
 
 
         //    显示所有的文本...

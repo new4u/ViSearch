@@ -3,7 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      0.1
 // @description  try to take over the world!
-// @author       本爷有空
+// @author      new4u
 // @connect    google.com
 // @connect    google.com.hk
 // @connect    google.com.jp

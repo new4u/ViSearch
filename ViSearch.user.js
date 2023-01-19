@@ -30,6 +30,8 @@
 // @downloadURL  https://raw.githubusercontent.com/new4u/ViSearch/master/ViSearch.user.js
 // @grant        none
 // ==/UserScript==
+
+
 let styleSheet = `
 body {
     // background-color: #272b30;
@@ -165,6 +167,8 @@ body {
     stroke: #fff;
 }
 `;
+
+//常量和css的js实现
 const xmlns = "http://www.w3.org/2000/svg";
 const width = 800;
 const height = 560;
@@ -294,6 +298,7 @@ button.addEventListener("click", function () {
         //     .distance(100) // 连接距离
         //     .strength(1) // 连接力强度 0 ~ 1
         //     .iterations(1) // 迭代次数
+        
         // Set up tooltip
         var tip = d3.tip()
             .attr('class', 'd3-tip')

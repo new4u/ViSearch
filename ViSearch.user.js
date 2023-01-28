@@ -3,7 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      0.1
 // @description  try to take over the world!
-// @author       本爷有空 
+// @author       本爷有空
 // @connect    google.com
 // @connect    google.com.hk
 // @connect    google.com.jp
@@ -62,7 +62,9 @@ body {
 
 
 .texts text {
-    display: none;
+    text-shadow: 0px 0px 5px white;
+
+
 }
 
 .texts text:hover {
@@ -168,6 +170,7 @@ body {
 const xmlns = "http://www.w3.org/2000/svg";
 const width = 800;
 const height = 560;
+const searchtext = document.querySelectorAll("input" && ".gLFyf")[1].value;
 let s = document.createElement('style');
 s.type = "text/css";
 s.innerHTML = styleSheet;
@@ -235,10 +238,7 @@ button.addEventListener("click", function () {
     // document.body.appendChild(svg1);
 
     $(document).ready(function () {
-        $(".d3-tip").remove();
-        // var svg = d3.select("#svg"),
-        //     width = svg.attr("width"),
-        //     height = svg.attr("height");
+
 
         //无按钮的添加一层
         var svg = d3.select("body").append("svg")
@@ -269,10 +269,10 @@ button.addEventListener("click", function () {
         var colors = ['#6ca46c', '#4e88af', '#c72eca', '#d2907c'];
         //临时半径R大小控制,之后改成连接数量影响大小
 
-        var sizes = [15, 5, 10, 2.5];
+        var sizes = [15, 10, 10, 5];
 
 
-        var forceRate = 50;
+        var forceRate = 500;
 
 
         var simulation = d3.forceSimulation()
@@ -285,21 +285,24 @@ button.addEventListener("click", function () {
             //centre setting up
             .force("center", d3.forceCenter(width / 2, height / 2));
 
-        // //试着改变力图的nodes吸引力和排斥力
-        // simulation.alphaDecay(0.05) // 衰减系数，值越大，图表稳定越快
-        // simulation.force('charge')
-        //     .strength(-forceRate) // 排斥力强度，正值相互吸引，负值相互排斥
-        // simulation.force('link')
-        //     .id(d => d.id) // set id getter
-        //     .distance(100) // 连接距离
-        //     .strength(1) // 连接力强度 0 ~ 1
-        //     .iterations(1) // 迭代次数
-        // Set up tooltip
+        //试着改变力图的nodes吸引力和排斥力
+        simulation.alphaDecay(0.05) // 衰减系数，值越大，图表稳定越快
+        simulation.force('charge')
+            .strength(-forceRate) // 排斥力强度，正值相互吸引，负值相互排斥
+        simulation.force('link')
+            .id(d => d.id) // set id getter
+            .distance(100) // 连接距离
+            .strength(1) // 连接力强度 0 ~ 1
+            .iterations(1) // 迭代次数
+
+        //定义tip
         var tip = d3.tip()
             .attr('class', 'd3-tip')
+            .style("z-index", "9999")
             .offset([-10, 0])
             .html(function (d) {
-                return d.name + "</span>";
+                return "<a href='" + d.url + "' target='_blank'>" + d.name + "</a>";
+                // return "<a href='" + d.url + "' target='_blank'>" + d.year + "-" + d.month + "  " + d.name + "</a>";
             })
         svg.call(tip);
 
@@ -404,7 +407,7 @@ button.addEventListener("click", function () {
             //搜索到的文章的摘要
             let abstract = element.querySelector(".VwiC3b.yXK7lf.MUxGbd.yDYNvb.lyLwlc.lEBKkf span:nth-child(2)");
             (abstract !== null) ? abstract = abstract.innerText : abstract = null;
-            console.log("abstract摘要:",abstract);
+            // console.log("abstract摘要:",abstract);
 
             // console.log(abstract);
 
@@ -427,7 +430,7 @@ button.addEventListener("click", function () {
 
 
 
-            console.log(elementEach);
+            // console.log(elementEach);
             return elementEach
 
         });
@@ -578,7 +581,7 @@ button.addEventListener("click", function () {
             category: 1,
             id: "news",
             //先用searchtext代替
-            name: "searchText",
+            name: searchtext,
             value: id,
             type: "news"
         }
@@ -606,7 +609,7 @@ button.addEventListener("click", function () {
 
 
         graph = data;
-        console.log(data);
+        // console.log(data);
         //d3 mapping data to html,make line with = 1
         //    links
         var link = svg.append("g")
@@ -735,17 +738,22 @@ button.addEventListener("click", function () {
             .attr("r", function (d) {
                 var uniqueWords = new Set(d.keyWords);
                 // console.log(uniqueWords.size);
-                return uniqueWords.size * 3
+                return uniqueWords.size
 
             })
             .attr("type", function (d, i) {
 
                 if (d.url) {
                     //			d.name = "<a style=font-size:12pt href='"+d.url+"' target='_blank'>"+d.year+"-"+d.month+"  "+d.name+"</a>";
-                    d.name = "<a href='" + d.url + "' target='_blank'>" + d.time + "-" + d.origin + "  " + d.name + "</a>";
-
+                    // d.name = "<a href='" + d.url + "' target='_blank'>" + d.time + "-" + d.origin + "  " + d.name + "</a>";
+                    d.name = d.time + "-" + d.origin + "-" + d.name;
                 }
             })
+            .on("click", function (d) {
+                if (d.url) {
+                    window.open(d.url, "_blank");
+                }
+            });
 
 
 
@@ -878,12 +886,17 @@ button.addEventListener("click", function () {
         node.append("title").text(function (d) {
             return d.name;
         })
+
         //    simulation里面的ticked初始化生成图形
         simulation
             .nodes(graph.nodes)
             .on("tick", ticked);
         simulation.force("link")
             .links(graph.links);
+
+        //调用tips
+        node.on("mouseover", tip.show)
+            .on("mouseout", tip.hide)
 
         // ticked()函数确定link的起始点坐标(source(x1,y1),target(x2,y2)),node确定中心点(cx,cy),文本通过translate平移变化
         function ticked() {
@@ -913,8 +926,6 @@ button.addEventListener("click", function () {
                 return 'translate(' + d.x + ',' + (d.y + sizes[d.category - 1] / 2) + ')';
             });
         }
-
-
     });
 
 
@@ -928,7 +939,7 @@ button.addEventListener("click", function () {
     //     //         $('.texts' && 'text').hide();
     //     //         $('.nodes' && 'circle').show();
     //     //     } else {
-    // $('texts' && 'text').show();
+    $('texts' && 'text').show();
     // $('.nodes' && 'circle').hide();
     //     //     }
     //     // })

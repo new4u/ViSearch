@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name         ViSearch/baiduData 0.14  enhance 1.点击;2.三度关系按照时间排序#24
+// @name         ViSearch/googleData 0.15 googleParse 2023-1-28 08:39:40
 // @namespace    http://tampermonkey.net/
 // @version      0.1
 // @description  try to take over the world!
-// @author       本爷有空
+// @author       本爷有空 
 // @connect    google.com
 // @connect    google.com.hk
 // @connect    google.com.jp
@@ -342,81 +342,108 @@ button.addEventListener("click", function () {
         // 不需要“”括起来，但是最后要用分号；
 
         //***开始解析网页
+        /* 谷歌获取 */
 
-        //成功在page之外获取到页面元素内容，发现百度的下一页，就是
-        let elements = Array.from(document.querySelectorAll(".c-container" && ".result"));
-        // console.log(elements);
-        //读取数组里内容map为value
-        let dataPage = elements.map(element => {
-            // console.log(element);
+        // // ChatGPT Code for extracting data from the search results
+        // var elements = document.querySelectorAll('.g');
+        // var elementEach = {};
+        // for (var i = 0; i < elements.length; i++) {
+        //     var element = elements[i];
+        //     var title = element.querySelector('.LC20lb').innerText;
+        //     var url = element.querySelector('a').href;
+        //     var siteName = element.querySelector('.TbwUpd').innerText;
+        //     var time = element.querySelector(".MUxGbd.wuQ4Ob.WZ8Tjf > span").innerText;
+        //     var abstract = element.querySelector('.st').innerText;
+        //     var keyWords = element.querySelectorAll('.S3Uucc');
+        //     var keyWordsArr = [];
+        //     for (var j = 0; j < keyWords.length; j++) {
+        //         keyWordsArr.push(keyWords[j].innerText);
+        //     }
+        //     elementEach = {
+        //         title: title,
+        //         url: url,
+        //         siteName: siteName,
+        //         time: time,
+        //         abstract: abstract,
+        //         keyWords: keyWordsArr
+        //     }
+        // }
+        // return elementEach;
 
-            //搜索到文章的标题
-            let title = element.querySelector(".t");
-            (title !== null) ? title = title.innerText : title = null;
+                //成功在page之外获取到页面元素内容，发现百度的下一页，就是
+                let elements = Array.from(document.querySelectorAll(".g"));
+                // console.log(elements);
+                //读取数组里内容map为value
+                let dataPage = elements.map(element => {
+                    // console.log(element);
 
-            // console.log(title);
+                    //搜索到文章的标题
+                    let title = element.querySelector(".LC20lb");
+                    (title !== null) ? title = title.innerText : title = null;
 
-            //搜索到文章的url
-            let url = element.querySelector(".t > a");
-            (url !== null) ? url = url.href : url = null;
+                    // console.log(title);
 
-            // console.log(url);
+                    //搜索到文章的url
+                    let url = element.querySelector("a");
+                    (url !== null) ? url = url.href : url = null;
 
-            //搜索到的文章的来源网站
-            let siteName = element.querySelector(".t > a");
-            (siteName !== null) ? siteName = siteName.innerText.split(" - ")[1] : siteName = null;
+                    // console.log(url);
 
-            // console.log(siteName);
+                    //搜索到的文章的来源网站
+                    let siteName = element.querySelector('.TbwUpd');
+                    (siteName !== null) ? siteName = siteName.innerText.split(" - ")[1] : siteName = null;
 
-            //搜索到的文章的发布日期
-            // let time = element.querySelector(".c-abstract>.newTimeFactor_before_abs"); //之前的query
-            let time = element.querySelector("div> div:nth-child(1) > div:nth-child(3) > div > span.c-color-gray2");
-            (time !== null) ? time = time.innerText : time = null; //google几天前时间可以计算一下
+                    // console.log(siteName);
 
-            // console.log(time);
+                    //搜索到的文章的发布日期
+                    // let time = element.querySelector(".c-abstract>.newTimeFactor_before_abs"); //之前的query
+                    let time = element.querySelector(".MUxGbd.wuQ4Ob.WZ8Tjf > span");
+                    (time !== null) ? time = time.innerText : time = null; //google几天前时间可以计算一下
 
-            //搜索到的文章的摘要
-            let abstract = element.querySelector("div> div:nth-child(1) > div:nth-child(3) > div > span.content-right_8Zs40");
-            (abstract !== null) ? abstract = abstract.innerText : abstract = null;
+                    // console.log(time);
 
-            // console.log(abstract);
+                    //搜索到的文章的摘要
+                    let abstract = element.querySelector(".st");
+                    (abstract !== null) ? abstract = abstract.innerText : abstract = null;
 
-            // 搜索到文章的关键词(relaited to经过百度分词的搜索框内容)
-            let keyWords = Array.from(element.querySelectorAll("em"));
-            (keyWords !== null) ? keyWords = keyWords.map(item => {
-                return item.innerText
-            }) : keyWords = null;
-            // console.log(keyWords);
+                    // console.log(abstract);
 
-
-            let elementEach = {
-                title,
-                url,
-                siteName,
-                time,
-                abstract,
-                keyWords
-            };
+                    // 搜索到文章的关键词(relaited to经过百度分词的搜索框内容)
+                    let keyWords = Array.from(element.querySelectorAll(".qkunPe"));
+                    (keyWords !== null) ? keyWords = keyWords.map(item => {
+                        return item.innerText
+                    }) : keyWords = null;
+                    // console.log(keyWords);
 
 
+                    let elementEach = {
+                        title,
+                        url,
+                        siteName,
+                        time,
+                        abstract,
+                        keyWords
+                    };
 
-            console.log(elementEach);
-            return elementEach
 
-        });
 
-        console.log(dataPage);
-        // let dataPageString = JSON.stringify(resultPages);
-        // let dataPage = JSON.parse(dataPageString);
+                    console.log(elementEach);
+                    return elementEach
 
-        // console.log("dataPage:"+dataPage);
+                });
 
-        let keyWords = []
-        for (let i in dataPage) {
-            let temp = dataPage[i].keyWords;
-            keyWords = keyWords.concat(temp)
-        }
-        let keyWordsSet = Array.from(new Set(keyWords))
+                console.log(dataPage);
+                // let dataPageString = JSON.stringify(resultPages);
+                // let dataPage = JSON.parse(dataPageString);
+
+                // console.log("dataPage:"+dataPage);
+
+                let keyWords = []
+                for (let i in dataPage) {
+                    let temp = dataPage[i].keyWords;
+                    keyWords = keyWords.concat(temp)
+                }
+                let keyWordsSet = Array.from(new Set(keyWords))
 
 
         //将nodes,links写成json,到d3里面读

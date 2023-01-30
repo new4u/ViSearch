@@ -63,7 +63,7 @@ body {
 
 @media screen and (max-width: 600px) {
     .text {
-      font-size: 8px; /* 当屏幕宽度小于600px时，最小字体为8px */
+      font-size: 8px; /* 当屏幕宽度小于600px时 最小字体为8px */
     }
   }
 
@@ -235,25 +235,12 @@ document.body.appendChild(button);
 
 //按键响应
 button.addEventListener("click", function () {
+
+
     //相当于初始化d3.js中的d3.select(...)函数可以用来选择页面中的元素，而.remove()方法可以用来删除选中的元素。因此在重新渲染之前，可以使用这些方法来删除之前渲染的元素。
     d3.selectAll("svg > *").remove();
 
     console.log("lets ViSearch click");
-
-    // var svg1 = document.createElementNS(xmlns, "svg");
-    // svg1.setAttributeNS(null,'id',"svg1");
-    // svg1.setAttributeNS(null,"width",width);
-    // svg1.setAttributeNS(null,"height",height);
-
-    // svg1.innerHTML = '<svg width="800" height="560" style="margin-left:80px;margin-bottom:-40px;" id="svg"></svg><div id="indicator"></div><div id="mode"><span class="active" style="border-top-right-radius: 0;border-bottom-right-radius:0;">节点</span><span style="border-top-left-radius:0;border-bottom-left-radius:0;position: relative;left: -5px">文字</span></div><div id="search1"><input type="text" class="form-control"></div><div id="info"><h4></h4></div></div>';
-    // // document.body.insertBefore(svg1, document.body.firstChild);//放在头部
-    // document.body.insertBefore(svg1, document.body.lastChild);//放在尾部
-
-    //     let svg1 = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    // svg1.setAttribute("width", width);
-    // svg1.setAttribute("height",height );
-    // svg1.style.cssText = "float: right;";
-    // document.body.appendChild(svg1);
 
 
     //无按钮的添加一层
@@ -264,24 +251,7 @@ button.addEventListener("click", function () {
         .style("top", "0")
         .style("right", "0")
         .style("z-index", "999")
-    // .style("background-color", "rgba(255, 255, 255, 0.5)") //白色底
-    // .style("background-color", "rgba(0, 0, 0, 0)") //黑色底
-    // .style("transition", "opacity 2s")
-    // .on("mouseover", function() {
-    //     d3.select(this).style("opacity", "0.5")
-    // })
-    // .on("mouseout", function() {
-    //     d3.select(this).style("opacity", "0")
-    // });
 
-    //渐进的效果
-
-
-    //     //remember its, not . var svg from d3,width,height from svg
-
-    // console.log(svg);
-    //        alter:define the (category)
-    // var types = ['中心文章', '分段', '关键分词', '搜索结果'];
 
 
     var simulation = d3.forceSimulation()

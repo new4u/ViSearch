@@ -61,11 +61,22 @@ body {
 }
 
 
-.texts text {
-    text-shadow: 0px 0px 5px white;
+@media screen and (max-width: 600px) {
+    .text {
+      font-size: 8px; /* 当屏幕宽度小于600px时，最小字体为8px */
+    }
+  }
+  
+  .texts text {
+    font-size: 12px; /* 最小字体为12px */
+    min-font-size: 8px; /* 最小字体不能小于8px */
+    max-font-size: 36px;
+    font-weight:bold;
+    font-family:"Microsoft YaHei";
+    text-shadow: 0 0 3px #fff, 0 0 10px #fff;
+  }
 
 
-}
 
 .texts text:hover {
     cursor: pointer;
@@ -85,6 +96,7 @@ body {
     text-align: left;
     color: #f2f2f2;
     font-size: 12px;
+    
 }
 
 #indicator > div {
@@ -170,6 +182,11 @@ body {
 const xmlns = "http://www.w3.org/2000/svg";
 const width = 800;
 const height = 560;
+const colors = ['#6ca46c', '#4e88af', '#c72eca', '#d2907c'];
+//临时半径R大小控制,之后改成连接数量影响大小
+const sizes = [15, 5, 10, 2.5];
+const forceRate = 50;
+
 const searchtext = document.querySelectorAll("input" && ".gLFyf")[1].value;
 let s = document.createElement('style');
 s.type = "text/css";
@@ -265,14 +282,7 @@ button.addEventListener("click", function () {
 
         // console.log(svg);
         //        alter:define the (category)
-        var types = ['中心文章', '分段', '关键分词', '搜索结果'];
-        var colors = ['#6ca46c', '#4e88af', '#c72eca', '#d2907c'];
-        //临时半径R大小控制,之后改成连接数量影响大小
-
-        var sizes = [15, 10, 10, 5];
-
-
-        var forceRate = 500;
+        // var types = ['中心文章', '分段', '关键分词', '搜索结果'];
 
 
         var simulation = d3.forceSimulation()
@@ -736,9 +746,10 @@ button.addEventListener("click", function () {
         //计算连接数
         svg.selectAll(".san")
             .attr("r", function (d) {
-                var uniqueWords = new Set(d.keyWords);
-                // console.log(uniqueWords.size);
-                return uniqueWords.size
+                let uniqueWords = new Set(d.keyWords);
+                let radius = uniqueWords.size * 10;
+                console.log("radius:",radius);
+                return radius
 
             })
             .attr("type", function (d, i) {
@@ -862,8 +873,12 @@ button.addEventListener("click", function () {
             .enter()
             .append("text").attr("font-size", function (d) {
                 // return d.size;
-                // 文字大小应该是以看的见为宗旨
-                return sizes[d.category - 1];
+                let uniqueWords = new Set(d.keyWords);
+                let radius = uniqueWords.size * 2;
+                let fontSize = radius * sizes[d.category - 1];
+
+                console.log("d:",d,";font-size return",fontSize)
+                return fontSize;
             })
             .attr("fill", function (d) {
                 // return "red";
@@ -875,7 +890,7 @@ button.addEventListener("click", function () {
             .text(function (d) {
                 return d.name;
             })
-            .attr("text-anchor", "middle")
+            .attr("text-anchor", "center")
             .call(d3.drag()
                 .on("start", dragstarted)
                 .on("drag", dragged)

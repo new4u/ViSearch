@@ -356,33 +356,7 @@ button.addEventListener("click", function () {
     //***开始解析网页
     /* 谷歌获取 */
 
-    // // ChatGPT Code for extracting data from the search results
-    // var elements = document.querySelectorAll('.g');
-    // var elementEach = {};
-    // for (var i = 0; i < elements.length; i++) {
-    //     var element = elements[i];
-    //     var title = element.querySelector('.LC20lb').innerText;
-    //     var url = element.querySelector('a').href;
-    //     var siteName = element.querySelector('.TbwUpd').innerText;
-    //     var time = element.querySelector(".MUxGbd.wuQ4Ob.WZ8Tjf > span").innerText;
-    //     var abstract = element.querySelector('.st').innerText;
-    //     var keyWords = element.querySelectorAll('.S3Uucc');
-    //     var keyWordsArr = [];
-    //     for (var j = 0; j < keyWords.length; j++) {
-    //         keyWordsArr.push(keyWords[j].innerText);
-    //     }
-    //     elementEach = {
-    //         title: title,
-    //         url: url,
-    //         siteName: siteName,
-    //         time: time,
-    //         abstract: abstract,
-    //         keyWords: keyWordsArr
-    //     }
-    // }
-    // return elementEach;
-
-    //成功在page之外获取到页面元素内容，发现百度的下一页，就是
+       //成功在page之外获取到页面元素内容，发现百度的下一页，就是
     let elements = Array.from(document.querySelectorAll(".g"));
     // console.log(elements);
     //读取数组里内容map为value
@@ -594,7 +568,14 @@ button.addEventListener("click", function () {
         value: id,
         type: "news"
     }
-
+    //和key和tag都建立连接
+    for (let i = 0; i < keyNode.length; i++) {
+        links.push({
+            source: "news",
+            target: keyNode[i].id,
+            value: 1
+        });
+        
     for (let i = 0; i < tagNode.length; i++) {
         links.push({
             source: "news",

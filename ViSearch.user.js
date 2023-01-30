@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         ViSearch/googleData 0.15 googleParse 2023-1-28 08:39:40
+// @name         ViSearch/googleData 0.15 googleParse 2023-1-28 08:39:40 changed to office
 // @namespace    http://tampermonkey.net/
 // @version      0.1
 // @description  try to take over the world!
@@ -66,7 +66,7 @@ body {
       font-size: 8px; /* 当屏幕宽度小于600px时，最小字体为8px */
     }
   }
-  
+
   .texts text {
     font-size: 12px; /* 最小字体为12px */
     min-font-size: 8px; /* 最小字体不能小于8px */
@@ -96,7 +96,7 @@ body {
     text-align: left;
     color: #f2f2f2;
     font-size: 12px;
-    
+
 }
 
 #indicator > div {

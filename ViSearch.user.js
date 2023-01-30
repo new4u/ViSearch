@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         ViSearch/baiduData 0.14  enhance 1.点击;2.三度关系按照时间排序#24
+// @name         ViSearch/googleData 0.15 googleParse 2023-1-28 08:39:40 changed to office
 // @namespace    http://tampermonkey.net/
 // @version      0.1
 // @description  try to take over the world!
@@ -61,9 +61,22 @@ body {
 }
 
 
-.texts text {
-    display: none;
-}
+@media screen and (max-width: 600px) {
+    .text {
+      font-size: 8px; /* 当屏幕宽度小于600px时，最小字体为8px */
+    }
+  }
+
+  .texts text {
+    font-size: 12px; /* 最小字体为12px */
+    min-font-size: 8px; /* 最小字体不能小于8px */
+    max-font-size: 36px;
+    font-weight:bold;
+    font-family:"Microsoft YaHei";
+    text-shadow: 0 0 3px #fff, 0 0 10px #fff;
+  }
+
+
 
 .texts text:hover {
     cursor: pointer;
@@ -83,6 +96,7 @@ body {
     text-align: left;
     color: #f2f2f2;
     font-size: 12px;
+
 }
 
 #indicator > div {
@@ -168,6 +182,12 @@ body {
 const xmlns = "http://www.w3.org/2000/svg";
 const width = 800;
 const height = 560;
+const colors = ['#6ca46c', '#4e88af', '#c72eca', '#d2907c'];
+//临时半径R大小控制,之后改成连接数量影响大小
+const sizes = [15, 5, 10, 2.5];
+const forceRate = 50;
+
+const searchtext = document.querySelectorAll("input" && ".gLFyf")[1].value;
 let s = document.createElement('style');
 s.type = "text/css";
 s.innerHTML = styleSheet;
@@ -235,10 +255,7 @@ button.addEventListener("click", function () {
     // document.body.appendChild(svg1);
 
     $(document).ready(function () {
-        $(".d3-tip").remove();
-        // var svg = d3.select("#svg"),
-        //     width = svg.attr("width"),
-        //     height = svg.attr("height");
+
 
         //无按钮的添加一层
         var svg = d3.select("body").append("svg")
@@ -265,14 +282,7 @@ button.addEventListener("click", function () {
 
         // console.log(svg);
         //        alter:define the (category)
-        var types = ['中心文章', '分段', '关键分词', '搜索结果'];
-        var colors = ['#6ca46c', '#4e88af', '#c72eca', '#d2907c'];
-        //临时半径R大小控制,之后改成连接数量影响大小
-
-        var sizes = [15, 5, 10, 2.5];
-
-
-        var forceRate = 50;
+        // var types = ['中心文章', '分段', '关键分词', '搜索结果'];
 
 
         var simulation = d3.forceSimulation()
@@ -285,21 +295,24 @@ button.addEventListener("click", function () {
             //centre setting up
             .force("center", d3.forceCenter(width / 2, height / 2));
 
-        // //试着改变力图的nodes吸引力和排斥力
-        // simulation.alphaDecay(0.05) // 衰减系数，值越大，图表稳定越快
-        // simulation.force('charge')
-        //     .strength(-forceRate) // 排斥力强度，正值相互吸引，负值相互排斥
-        // simulation.force('link')
-        //     .id(d => d.id) // set id getter
-        //     .distance(100) // 连接距离
-        //     .strength(1) // 连接力强度 0 ~ 1
-        //     .iterations(1) // 迭代次数
-        // Set up tooltip
+        //试着改变力图的nodes吸引力和排斥力
+        simulation.alphaDecay(0.05) // 衰减系数，值越大，图表稳定越快
+        simulation.force('charge')
+            .strength(-forceRate) // 排斥力强度，正值相互吸引，负值相互排斥
+        simulation.force('link')
+            .id(d => d.id) // set id getter
+            .distance(100) // 连接距离
+            .strength(1) // 连接力强度 0 ~ 1
+            .iterations(1) // 迭代次数
+
+        //定义tip
         var tip = d3.tip()
             .attr('class', 'd3-tip')
+            .style("z-index", "9999")
             .offset([-10, 0])
             .html(function (d) {
-                return d.name + "</span>";
+                return "<a href='" + d.url + "' target='_blank'>" + d.name + "</a>";
+                // return "<a href='" + d.url + "' target='_blank'>" + d.year + "-" + d.month + "  " + d.name + "</a>";
             })
         svg.call(tip);
 
@@ -342,47 +355,74 @@ button.addEventListener("click", function () {
         // 不需要“”括起来，但是最后要用分号；
 
         //***开始解析网页
+        /* 谷歌获取 */
+
+        // // ChatGPT Code for extracting data from the search results
+        // var elements = document.querySelectorAll('.g');
+        // var elementEach = {};
+        // for (var i = 0; i < elements.length; i++) {
+        //     var element = elements[i];
+        //     var title = element.querySelector('.LC20lb').innerText;
+        //     var url = element.querySelector('a').href;
+        //     var siteName = element.querySelector('.TbwUpd').innerText;
+        //     var time = element.querySelector(".MUxGbd.wuQ4Ob.WZ8Tjf > span").innerText;
+        //     var abstract = element.querySelector('.st').innerText;
+        //     var keyWords = element.querySelectorAll('.S3Uucc');
+        //     var keyWordsArr = [];
+        //     for (var j = 0; j < keyWords.length; j++) {
+        //         keyWordsArr.push(keyWords[j].innerText);
+        //     }
+        //     elementEach = {
+        //         title: title,
+        //         url: url,
+        //         siteName: siteName,
+        //         time: time,
+        //         abstract: abstract,
+        //         keyWords: keyWordsArr
+        //     }
+        // }
+        // return elementEach;
 
         //成功在page之外获取到页面元素内容，发现百度的下一页，就是
-        let elements = Array.from(document.querySelectorAll(".c-container" && ".result"));
+        let elements = Array.from(document.querySelectorAll(".g"));
         // console.log(elements);
         //读取数组里内容map为value
         let dataPage = elements.map(element => {
             // console.log(element);
 
             //搜索到文章的标题
-            let title = element.querySelector(".t");
+            let title = element.querySelector(".LC20lb");
             (title !== null) ? title = title.innerText : title = null;
 
             // console.log(title);
 
             //搜索到文章的url
-            let url = element.querySelector(".t > a");
+            let url = element.querySelector("a");
             (url !== null) ? url = url.href : url = null;
 
             // console.log(url);
 
-            //搜索到的文章的来源网站
-            let siteName = element.querySelector(".t > a");
-            (siteName !== null) ? siteName = siteName.innerText.split(" - ")[1] : siteName = null;
-
+            //搜索到的文章的来源网站r.split(" - ")[1]
+            let siteName = title;
+            (siteName !== null) ? siteName = siteName.split(" - ")[1] : siteName = null;
             // console.log(siteName);
 
             //搜索到的文章的发布日期
             // let time = element.querySelector(".c-abstract>.newTimeFactor_before_abs"); //之前的query
-            let time = element.querySelector("div> div:nth-child(1) > div:nth-child(3) > div > span.c-color-gray2");
+            let time = element.querySelector(".MUxGbd.wuQ4Ob.WZ8Tjf > span");
             (time !== null) ? time = time.innerText : time = null; //google几天前时间可以计算一下
 
             // console.log(time);
 
             //搜索到的文章的摘要
-            let abstract = element.querySelector("div> div:nth-child(1) > div:nth-child(3) > div > span.content-right_8Zs40");
+            let abstract = element.querySelector(".VwiC3b.yXK7lf.MUxGbd.yDYNvb.lyLwlc.lEBKkf span:nth-child(2)");
             (abstract !== null) ? abstract = abstract.innerText : abstract = null;
+            // console.log("abstract摘要:",abstract);
 
             // console.log(abstract);
 
             // 搜索到文章的关键词(relaited to经过百度分词的搜索框内容)
-            let keyWords = Array.from(element.querySelectorAll("em"));
+            let keyWords = Array.from(element.querySelectorAll(".qkunPe"));
             (keyWords !== null) ? keyWords = keyWords.map(item => {
                 return item.innerText
             }) : keyWords = null;
@@ -400,7 +440,7 @@ button.addEventListener("click", function () {
 
 
 
-            console.log(elementEach);
+            // console.log(elementEach);
             return elementEach
 
         });
@@ -551,7 +591,7 @@ button.addEventListener("click", function () {
             category: 1,
             id: "news",
             //先用searchtext代替
-            name: "searchText",
+            name: searchtext,
             value: id,
             type: "news"
         }
@@ -579,7 +619,7 @@ button.addEventListener("click", function () {
 
 
         graph = data;
-        console.log(data);
+        // console.log(data);
         //d3 mapping data to html,make line with = 1
         //    links
         var link = svg.append("g")
@@ -706,19 +746,25 @@ button.addEventListener("click", function () {
         //计算连接数
         svg.selectAll(".san")
             .attr("r", function (d) {
-                var uniqueWords = new Set(d.keyWords);
-                // console.log(uniqueWords.size);
-                return uniqueWords.size * 3
+                let uniqueWords = new Set(d.keyWords);
+                let radius = uniqueWords.size * 10;
+                console.log("radius:",radius);
+                return radius
 
             })
             .attr("type", function (d, i) {
 
                 if (d.url) {
                     //			d.name = "<a style=font-size:12pt href='"+d.url+"' target='_blank'>"+d.year+"-"+d.month+"  "+d.name+"</a>";
-                    d.name = "<a href='" + d.url + "' target='_blank'>" + d.time + "-" + d.origin + "  " + d.name + "</a>";
-
+                    // d.name = "<a href='" + d.url + "' target='_blank'>" + d.time + "-" + d.origin + "  " + d.name + "</a>";
+                    d.name = d.time + "-" + d.origin + "-" + d.name;
                 }
             })
+            .on("click", function (d) {
+                if (d.url) {
+                    window.open(d.url, "_blank");
+                }
+            });
 
 
 
@@ -827,8 +873,12 @@ button.addEventListener("click", function () {
             .enter()
             .append("text").attr("font-size", function (d) {
                 // return d.size;
-                // 文字大小应该是以看的见为宗旨
-                return sizes[d.category - 1];
+                let uniqueWords = new Set(d.keyWords);
+                let radius = uniqueWords.size * 2;
+                let fontSize = radius * sizes[d.category - 1];
+
+                console.log("d:",d,";font-size return",fontSize)
+                return fontSize;
             })
             .attr("fill", function (d) {
                 // return "red";
@@ -840,7 +890,7 @@ button.addEventListener("click", function () {
             .text(function (d) {
                 return d.name;
             })
-            .attr("text-anchor", "middle")
+            .attr("text-anchor", "center")
             .call(d3.drag()
                 .on("start", dragstarted)
                 .on("drag", dragged)
@@ -851,12 +901,17 @@ button.addEventListener("click", function () {
         node.append("title").text(function (d) {
             return d.name;
         })
+
         //    simulation里面的ticked初始化生成图形
         simulation
             .nodes(graph.nodes)
             .on("tick", ticked);
         simulation.force("link")
             .links(graph.links);
+
+        //调用tips
+        node.on("mouseover", tip.show)
+            .on("mouseout", tip.hide)
 
         // ticked()函数确定link的起始点坐标(source(x1,y1),target(x2,y2)),node确定中心点(cx,cy),文本通过translate平移变化
         function ticked() {
@@ -886,8 +941,6 @@ button.addEventListener("click", function () {
                 return 'translate(' + d.x + ',' + (d.y + sizes[d.category - 1] / 2) + ')';
             });
         }
-
-
     });
 
 
@@ -901,7 +954,7 @@ button.addEventListener("click", function () {
     //     //         $('.texts' && 'text').hide();
     //     //         $('.nodes' && 'circle').show();
     //     //     } else {
-    // $('texts' && 'text').show();
+    $('texts' && 'text').show();
     // $('.nodes' && 'circle').hide();
     //     //     }
     //     // })

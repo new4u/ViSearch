@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         ViSearch/googleData 0.15.1
+// @name         ViSearch/googleData
 // @namespace    http://tampermonkey.net/
-// @version      0.15.1
-// @description  *下一步,nodes的分层, 三度关系放在最下面...兼容office chrome*删掉了$的以及domload的部分 googleParse 2023-1-28 08:39:40 changed to office
+// @version      0.15.3
+// @description  *改写成如果有d.time和d.name那么就显示上面的,如果没有 ,就显示d.name
 // @author       本爷有空
 // @connect    google.com
 // @connect    google.com.hk
@@ -870,10 +870,10 @@ button.addEventListener("click", function () {
             return colors[d.category - 1];
         })
         .attr("name", function (d) {
-            return d.name;
+            return d.time;
         })
         .text(function (d) {
-            return d.name;
+            return (d.time ? d.time + d.name : d.name);
         })
         .attr("text-anchor", "center")
         .on("click", function (d) {
@@ -889,7 +889,7 @@ button.addEventListener("click", function () {
 
     //圆增加title...
     node.append("title").text(function (d) {
-        return d.name;
+        return d.time + d.name ;
     })
 
     //    simulation里面的ticked初始化生成图形
@@ -900,9 +900,9 @@ button.addEventListener("click", function () {
         .links(graph.links);
 
     /* //点击任意一个node, 不与之相连的节点和连线都变透明,怎么做
-    
+
     可以在点击node事件处理函数中通过改变对应元素的透明度实现：
-    
+
     获取点击的node的相邻节点
     对于不相邻的节点，修改其透明度
     对于不相邻的连线，修改其透明度

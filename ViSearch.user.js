@@ -905,6 +905,45 @@ button.addEventListener("click", function () {
     simulation.force("link")
         .links(graph.links);
 
+    /* //点击任意一个node, 不与之相连的节点和连线都变透明,怎么做
+    
+    可以在点击node事件处理函数中通过改变对应元素的透明度实现：
+    
+    获取点击的node的相邻节点
+    对于不相邻的节点，修改其透明度
+    对于不相邻的连线，修改其透明度
+    代码示例： */
+
+    var isTransparent = false;
+
+    // 为每个node绑定点击事件
+    node.on("click", function (d) {
+        // 根据当前状态进行相应的操作
+        if (!isTransparent) {
+            link.style("opacity", function (l) {
+                if (d === l.source || d === l.target) {
+                    return 1;
+                } else {
+                    return 0.1;
+                }
+            });
+            node.style("opacity", function (n) {
+                if (d === n) {
+                    return 1;
+                } else {
+                    return 0.1;
+                }
+            });
+            isTransparent = true;
+        } else {
+            link.style("opacity", 1);
+            node.style("opacity", 1);
+            isTransparent = false;
+        }
+    });
+
+
+
     //调用tips
     node.on("mouseover", tip.show)
         .on("mouseout", tip.hide)

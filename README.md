@@ -21,9 +21,8 @@ A repo for visualizing all searching results, help finding the 1
 Please submit your updates through pull request, by following the instructions below:
 
       1. git clone https://github.com/new4u/ViSearch.git
-      2. [optional] git checkout <objective branch, generally it is main>
-      3. git checkout -b <your branch name>
-      4. git add . 
-      5. git commit -m "<commit message>"
-      6. git push origin head
-      7. Create the PR at github.com
+      2. git checkout -b <your branch name>
+      3. git add . 
+      4. git commit -m "<commit message>"
+      5. git push origin head
+      6. Create the PR at github.com

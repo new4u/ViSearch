@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         ViSearch/googleData 0.15 googleParse 2023-1-28 08:39:40 changed to office
+// @name         New Userscript
 // @namespace    http://tampermonkey.net/
 // @version      0.1
 // @description  try to take over the world!

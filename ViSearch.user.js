@@ -184,7 +184,7 @@ const width = 800;
 const height = 560;
 const colors = ['#6ca46c', '#4e88af', '#c72eca', '#d2907c'];
 //临时半径R大小控制,之后改成连接数量影响大小
-const sizes = [15, 5, 10, 2.5];
+const sizes = [30, 20, 20, 0.5];
 const forceRate = 1000;
 
 const searchtext = document.querySelectorAll("input" && ".gLFyf")[1].value;
@@ -304,16 +304,16 @@ button.addEventListener("click", function () {
         .strength(1) // 连接力强度 0 ~ 1
         .iterations(1) // 迭代次数
 
-    //定义tip
-    var tip = d3.tip()
-        .attr('class', 'd3-tip')
-        .style("z-index", "9999")
-        .offset([-10, 0])
-        .html(function (d) {
-            return "<a href='" + d.url + "' target='_blank'>" + d.name + "</a>";
-            // return "<a href='" + d.url + "' target='_blank'>" + d.year + "-" + d.month + "  " + d.name + "</a>";
-        })
-    svg.call(tip);
+    // //定义tip
+    // var tip = d3.tip()
+    //     .attr('class', 'd3-tip')
+    //     .style("z-index", "9999")
+    //     .offset([-10, 0])
+    //     .html(function (d) {
+    //         return "<a href='" + d.url + "' target='_blank'>" + d.name + "</a>";
+    //         // return "<a href='" + d.url + "' target='_blank'>" + d.year + "-" + d.month + "  " + d.name + "</a>";
+    //     })
+    // svg.call(tip);
 
 
     //added a var
@@ -747,20 +747,7 @@ button.addEventListener("click", function () {
             console.log("radius:", radius);
             return radius
         })
-        .style("fill-opacity", 0.5)
-        .attr("type", function (d, i) {
-
-            if (d.url) {
-                //			d.name = "<a style=font-size:12pt href='"+d.url+"' target='_blank'>"+d.year+"-"+d.month+"  "+d.name+"</a>";
-                // d.name = "<a href='" + d.url + "' target='_blank'>" + d.time + "-" + d.origin + "  " + d.name + "</a>";
-                d.name = d.time + "-" + d.origin + "-" + d.name;
-            }
-        })
-        .on("click", function (d) {
-            if (d.url) {
-                window.open(d.url, "_blank");
-            }
-        });
+        .style("fill-opacity", 0.5);
 
 
 
@@ -855,7 +842,9 @@ button.addEventListener("click", function () {
     // // 将time为空的节点放在底部
     // sanNodes.filter(function (d) { return !d.time; }).attr("fy", height);
 
-
+    // //调用tips
+    // node.on("mouseover", tip.show)
+    //     .on("mouseout", tip.hide)
 
 
 
@@ -887,6 +876,11 @@ button.addEventListener("click", function () {
             return d.name;
         })
         .attr("text-anchor", "center")
+        .on("click", function (d) {
+            if (d.url) {
+                window.open(d.url, "_blank");
+            }
+        })
         .call(d3.drag()
             .on("start", dragstarted)
             .on("drag", dragged)
@@ -917,21 +911,29 @@ button.addEventListener("click", function () {
     var isTransparent = false;
 
     // 为每个node绑定点击事件
-    node.on("click", function (d) {
+    node.on("click", function(d) {
         // 根据当前状态进行相应的操作
         if (!isTransparent) {
-            link.style("opacity", function (l) {
+            link.style("opacity", function(l) {
                 if (d === l.source || d === l.target) {
                     return 1;
                 } else {
                     return 0.1;
                 }
             });
-            node.style("opacity", function (n) {
-                if (d === n) {
-                    return 1;
-                } else {
+            node.style("opacity", function(n) {
+                // 只对与点击的圆圈不相关的圆圈透明度进行更改
+                var linked = false;
+                link.each(function(l) {
+                    if (d === l.source || d === l.target) {
+                        linked = true;
+                        return;
+                    }
+                });
+                if (!linked) {
                     return 0.1;
+                } else {
+                    return 1;
                 }
             });
             isTransparent = true;
@@ -944,9 +946,7 @@ button.addEventListener("click", function () {
 
 
 
-    //调用tips
-    node.on("mouseover", tip.show)
-        .on("mouseout", tip.hide)
+
 
     // ticked()函数确定link的起始点坐标(source(x1,y1),target(x2,y2)),node确定中心点(cx,cy),文本通过translate平移变化
     function ticked() {

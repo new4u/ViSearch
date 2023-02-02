@@ -1,0 +1,1 @@
+span.c-color-gray2

@@ -1,21 +1,12 @@
 // ==UserScript==
-// @name         ViSearch/googleData
-// @namespace    http://tampermonkey.net/
-// @version      0.15.3
-// @description  *改写成如果有d.time和d.name那么就显示上面的,如果没有 ,就显示d.name
-// @author       本爷有空
+// @name         ViSearch/Google of Google
+// @namespace    https://github.com/new4u
+// @version      draft0.15.3
+// @description  Beta version.ViSearch/Google of Google...Beyond the AI with eyes
+// @author       new4u本爷有空
 // @connect    google.com
 // @connect    google.com.hk
 // @connect    google.com.jp
-// @connect    baidu.com
-// @include    *://ipv6.baidu.com/*
-// @include    *://www.baidu.com/*
-// @include    *://www1.baidu.com/*
-// @include    *://m.baidu.com/*
-// @include    *://xueshu.baidu.com/s*
-// @exclude    https://zhidao.baidu.com/*
-// @exclude    https://*.zhidao.baidu.com/*
-// @exclude    https://www.baidu.com/img/*
 // @include    *://encrypted.google.*/search*
 // @include    *://*.google*/search*
 // @include    *://*.google*/webhp*
@@ -29,6 +20,8 @@
 // @updateURL    https://raw.githubusercontent.com/new4u/ViSearch/master/ViSearch.user.js
 // @downloadURL  https://raw.githubusercontent.com/new4u/ViSearch/master/ViSearch.user.js
 // @grant        none
+// @copyright    2015-2023, new4u
+// @license      GPL-3.0-only
 // ==/UserScript==
 let styleSheet = `
 body {

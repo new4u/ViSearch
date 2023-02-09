@@ -17,8 +17,8 @@
 // @require     http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js
 // @require     http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js
 // @resource    http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css
-// @updateURL    https://raw.githubusercontent.com/new4u/ViSearch/master/ViSearch.user.js
-// @downloadURL  https://raw.githubusercontent.com/new4u/ViSearch/master/ViSearch.user.js
+// @updateURL    https://github.com/new4u/ViSearch/raw/releasegoogleData/ViSearch.user.js
+// @downloadURL  https://github.com/new4u/ViSearch/raw/releasegoogleData/ViSearch.user.js
 // @grant        none
 // @copyright    2015-2023, new4u
 // @license      GPL-3.0-only

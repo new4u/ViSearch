@@ -11,14 +11,12 @@
 // @include    *://*.google*/search*
 // @include    *://*.google*/webhp*
 // @match        *www.google.com*
-// @icon         https://www.google.com/s2/favicons?sz=64&domain=codechef.com
-// @require     https://d3js.org/d3.v4.js
+// @icon        https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/WikiProject_Sociology_Babel_%28Deus_WikiProjects%29.png/240px-WikiProject_Sociology_Babel_%28Deus_WikiProjects%29.png
+// @require     https://unpkg.com/d3@4.13.0/build/d3.min.js
 // @require     https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.min.js
 // @require     http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js
 // @require     http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js
 // @resource    http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css
-// @updateURL    https://github.com/new4u/ViSearch/raw/releasegoogleData/ViSearch.user.js
-// @downloadURL  https://github.com/new4u/ViSearch/raw/releasegoogleData/ViSearch.user.js
 // @grant        none
 // @copyright    2015-2023, new4u
 // @license      GPL-3.0-only

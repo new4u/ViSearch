@@ -203,7 +203,7 @@ s.innerHTML = styleSheet;
 
 //把按钮也搬到浮动右侧
 let button = document.createElement("button");
-button.innerHTML = "Show SVG";
+button.innerHTML = "ViSearch";
 button.style.cssText = "position: fixed; top: 0; right: 0; z-index: 999; width: 100px; height: 50px; background-color: green; color: white; font-size: 20px;";
 
 button.addEventListener("click", function () {

@@ -1,6 +1,11 @@
+<p align="center">
 <a href="https://www.youtube.com/watch?v=wuQELy6nTjk" target="_blank">
-  <img src="https://img.youtube.com/vi/wuQELy6nTjk/0.jpg" alt="video">
+  <img src="https://img.youtube.com/vi/wuQELy6nTjk/0.jpg" alt="video thumbnail">
 </a>
+<p align="center">
+  <b>Click to watch the video on YouTube</b></p>
+</p>
+
 
 
 # Introducing ViSearch: The Low-Carbon AI Assistant

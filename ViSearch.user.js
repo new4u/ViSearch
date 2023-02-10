@@ -1,34 +1,36 @@
 // ==UserScript==
-// @name         ViSearch/googleData
-// @namespace    http://tampermonkey.net/
-// @version      0.15.3
-// @description  *改写成如果有d.time和d.name那么就显示上面的,如果没有 ,就显示d.name
-// @author       本爷有空
+// @name         ViSearch/Google of Google
+// @name:zh-CN    ViSearch/Google of Google
+// @name:zh-TW    ViSearch/Google of Google
+// @name:fr    ViSearch/Google of Google
+// @name:es    ViSearch/Google of Google       
+// @name:th    ViSearch/Google of Google
+// @namespace    https://github.com/new4u
+// @version      draft0.16.1
+// @description:zh-cn  Beta version.ViSearch/Google of Google...Beyond the AI with eyes
+// @description:zh-tw  Beta version.ViSearch/Google of Google...Beyond the AI with eyes
+// @description:fr  Beta version.ViSearch/Google of Google...Beyond the AI with eyes
+// @description:es  Beta version.ViSearch/Google of Google...Beyond the AI with eyes
+// @description:th  Beta version.ViSearch/Google of Google...Beyond the AI with eyes
+// @author       new4u本爷有空
 // @connect    google.com
 // @connect    google.com.hk
 // @connect    google.com.jp
-// @connect    baidu.com
-// @include    *://ipv6.baidu.com/*
-// @include    *://www.baidu.com/*
-// @include    *://www1.baidu.com/*
-// @include    *://m.baidu.com/*
-// @include    *://xueshu.baidu.com/s*
-// @exclude    https://zhidao.baidu.com/*
-// @exclude    https://*.zhidao.baidu.com/*
-// @exclude    https://www.baidu.com/img/*
 // @include    *://encrypted.google.*/search*
 // @include    *://*.google*/search*
 // @include    *://*.google*/webhp*
 // @match        *www.google.com*
-// @icon         https://www.google.com/s2/favicons?sz=64&domain=codechef.com
-// @require     https://d3js.org/d3.v4.js
+// @icon        https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/WikiProject_Sociology_Babel_%28Deus_WikiProjects%29.png/240px-WikiProject_Sociology_Babel_%28Deus_WikiProjects%29.png
+// @require     https://unpkg.com/d3@4.13.0/build/d3.min.js
 // @require     https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.min.js
 // @require     http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js
 // @require     http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js
 // @resource    http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css
-// @updateURL    https://raw.githubusercontent.com/new4u/ViSearch/master/ViSearch.user.js
-// @downloadURL  https://raw.githubusercontent.com/new4u/ViSearch/master/ViSearch.user.js
+// @updateURL    https://github.com/new4u/ViSearch/raw/releasegoogleData/ViSearch.user.js
+// @downloadURL  https://github.com/new4u/ViSearch/raw/releasegoogleData/ViSearch.user.js
 // @grant        none
+// @copyright    2015-2023, new4u
+// @license      GPL-3.0-only
 // ==/UserScript==
 let styleSheet = `
 body {

@@ -24,7 +24,7 @@ ViSearch has the potential to be even more intuitive than ChatGPT in the future.
 
 1. Install Tampermonkey on Chrome or Edge.
 2. Install the script from Greasy Fork: [https://greasyfork.org/en/scripts/459689-visearch-google-of-google](https://greasyfork.org/en/scripts/459689-visearch-google-of-google).
-3. Open Google and search, then click "Show SVG".
+3. Open Google and search, then click "Visearch".
 
 You can also find the ViSearch repository on 
 - GitHub: new4u/ViSearch. It is a repo for visualizing all search results to help you find the information you need quickly and easily. 

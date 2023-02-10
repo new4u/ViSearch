@@ -1,4 +1,7 @@
-<iframe width="560" height="315" src="https://www.youtube.com/embed/wuQELy6nTjk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<a href="https://www.youtube.com/watch?v=wuQELy6nTjk" target="_blank">
+  <img src="https://img.youtube.com/vi/wuQELy6nTjk/0.jpg" alt="video">
+</a>
+
 
 # Introducing ViSearch: The Low-Carbon AI Assistant
 

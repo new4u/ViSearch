@@ -1,28 +1,23 @@
-# ViSearch
-A repo for visualizing all searching results, help finding the 1
-# Connect data of the whole world
+<iframe width="560" height="315" src="https://www.youtube.com/embed/wuQELy6nTjk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+# Introducing ViSearch: The Low-Carbon AI Assistant
 
-## This repo does two things
+## The Most Intuitive and Low-Carbon AI Assistant
 
-1. Data extraction and mining
-   
-    Analyze the relation between data
+Today, ViSearch has migrated to the plugin marketplace and free trials are open. Try it now!
 
-2. Data visualization
+The complete rights are held by the author and powered by love. The source code is open and available for self-service at [https://github.com/new4u](https://github.com/new4u).
 
-    Visualize the relation
-    
-3. Evolution route
+## The Google of Google - Even More Intuitive Than ChatGPT
 
-   Java-》Node.js+puppeteer+D3.js-》D3.js+Userscript
+ViSearch has the potential to be even more intuitive than ChatGPT in the future.
 
-## How to contribute
+## How to Use ViSearch
 
-Please submit your updates through pull request, by following the instructions below:
+1. Install Tampermonkey on Chrome or Edge.
+2. Install the script from Greasy Fork: [https://greasyfork.org/en/scripts/459689-visearch-google-of-google](https://greasyfork.org/en/scripts/459689-visearch-google-of-google).
+3. Open Google and search, then click "Show SVG".
 
-      1. git clone https://github.com/new4u/ViSearch.git
-      2. git checkout -b <your branch name>
-      3. git add . 
-      4. git commit -m "<commit message>"
-      5. git push origin head
-      6. Create the PR at github.com
+You can also find the ViSearch repository on 
+- GitHub: new4u/ViSearch. It is a repo for visualizing all search results to help you find the information you need quickly and easily. 
+Check out the release on 
+- Greasy Fork: [https://greasyfork.org/en/scripts/459689-visearch-google-of-google](https://greasyfork.org/en/scripts/459689-visearch-google-of-google).

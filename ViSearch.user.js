@@ -1,8 +1,17 @@
 // ==UserScript==
 // @name         ViSearch/Google of Google
+// @name:zh-CN    ViSearch/Google of Google
+// @name:zh-TW    ViSearch/Google of Google
+// @name:fr    ViSearch/Google of Google
+// @name:es    ViSearch/Google of Google       
+// @name:th    ViSearch/Google of Google
 // @namespace    https://github.com/new4u
-// @version      draft0.15.3
-// @description  Beta version.ViSearch/Google of Google...Beyond the AI with eyes
+// @version      draft0.16.1
+// @description:zh-cn  Beta version.ViSearch/Google of Google...Beyond the AI with eyes
+// @description:zh-tw  Beta version.ViSearch/Google of Google...Beyond the AI with eyes
+// @description:fr  Beta version.ViSearch/Google of Google...Beyond the AI with eyes
+// @description:es  Beta version.ViSearch/Google of Google...Beyond the AI with eyes
+// @description:th  Beta version.ViSearch/Google of Google...Beyond the AI with eyes
 // @author       new4u本爷有空
 // @connect    google.com
 // @connect    google.com.hk
@@ -17,6 +26,8 @@
 // @require     http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js
 // @require     http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js
 // @resource    http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css
+// @updateURL    https://github.com/new4u/ViSearch/raw/releasegoogleData/ViSearch.user.js
+// @downloadURL  https://github.com/new4u/ViSearch/raw/releasegoogleData/ViSearch.user.js
 // @grant        none
 // @copyright    2015-2023, new4u
 // @license      GPL-3.0-only

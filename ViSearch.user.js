@@ -6,7 +6,7 @@
 // @name:es    ViSearch/Google of Google       
 // @name:th    ViSearch/Google of Google
 // @namespace    https://github.com/new4u
-// @version      draft0.16.1
+// @version      draft0.16.2
 // @description:zh-cn  Beta version.ViSearch/Google of Google...Beyond the AI with eyes
 // @description:zh-tw  Beta version.ViSearch/Google of Google...Beyond the AI with eyes
 // @description:fr  Beta version.ViSearch/Google of Google...Beyond the AI with eyes
@@ -26,11 +26,10 @@
 // @require     http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js
 // @require     http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js
 // @resource    http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css
-// @updateURL    https://github.com/new4u/ViSearch/raw/releasegoogleData/ViSearch.user.js
-// @downloadURL  https://github.com/new4u/ViSearch/raw/releasegoogleData/ViSearch.user.js
 // @grant        none
 // @copyright    2015-2023, new4u
 // @license      GPL-3.0-only
+// @description Beta version.ViSearch/Google of Google...Beyond the AI with eyes
 // ==/UserScript==
 let styleSheet = `
 body {
@@ -203,7 +202,7 @@ s.innerHTML = styleSheet;
 
 //把按钮也搬到浮动右侧
 let button = document.createElement("button");
-button.innerHTML = "Show SVG";
+button.innerHTML = "ViSearch";
 button.style.cssText = "position: fixed; top: 0; right: 0; z-index: 999; width: 100px; height: 50px; background-color: green; color: white; font-size: 20px;";
 
 button.addEventListener("click", function () {

@@ -6,12 +6,12 @@
 // @name:es    ViSearch/Google of Google
 // @name:th    ViSearch/Google of Google
 // @namespace    https://github.com/new4u
-// @version      draft 3.117
-// @description:zh-cn  Beta version.Beyond the ChatGPT/AI with eyes
-// @description:zh-tw  Beta version.Beyond the ChatGPT/AI with eyes
-// @description:fr  Beta version.Beyond the ChatGPT/AI with eyes
-// @description:es  Beta version.Beyond the ChatGPT/AI with eyes
-// @description:th  Beta version.Beyond the ChatGPT/AI with eyes
+// @version      V1.117
+// @description:zh-cn  Beyond the ChatGPT/AI with eyes
+// @description:zh-tw  Beyond the ChatGPT/AI with eyes
+// @description:fr  Beyond the ChatGPT/AI with eyes
+// @description:es  Beyond the ChatGPT/AI with eyes
+// @description:th  Beyond the ChatGPT/AI with eyes
 // @author       new4u本爷有空
 // @connect    google.com
 // @connect    google.com.hk
@@ -31,6 +31,10 @@
 // @license      GPL-3.0-only
 // @description Beta version.ViSearch/Google of Google...Beyond the AI with eyes
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw
+// @note         2023-2-21-v1.117 发布迁移到userscript以来第一个正式版本
+// @note         2016 Java -> 2019 Node.js -> 2023-2-09 各种各样的历史更新记录，从一个版本迭代到另一个版本
+// @updateURL    https://raw.githubusercontent.com/new4u/ViSearch/master/ViSearch.user.js
+// @downloadURL  https://raw.githubusercontent.com/new4u/ViSearch/master/ViSearch.user.js
 // @grant        none
 // ==/UserScript==
 // @require      https://d3js.org/d3.v6.min.js

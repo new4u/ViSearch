@@ -6,7 +6,7 @@
 // @name:es    ViSearch/Google of Google
 // @name:th    ViSearch/Google of Google
 // @namespace    https://github.com/new4u
-// @version      4.117
+// @version      4.117.1
 // @description:zh-cn  Beyond the ChatGPT/AI with eyes
 // @description:zh-tw  Beyond the ChatGPT/AI with eyes
 // @description:fr  Beyond the ChatGPT/AI with eyes

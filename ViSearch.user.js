@@ -6,7 +6,7 @@
 // @name:es    ViSearch/Google of Google
 // @name:th    ViSearch/Google of Google
 // @namespace    https://github.com/new4u
-// @version      4.117.1
+// @version      4.117.2
 // @description:zh-cn  Beyond the ChatGPT/AI with eyes
 // @description:zh-tw  Beyond the ChatGPT/AI with eyes
 // @description:fr  Beyond the ChatGPT/AI with eyes
@@ -29,12 +29,10 @@
 // @grant        none
 // @copyright    2015-2023, new4u
 // @license      GPL-3.0-only
-// @description  ViSearch/Google of Google...Beyond the AI with eyes
+// @description  Beyond the ChatGPT/AI with eyes.ViSearch as the Lightweight alternatives to ChatGPT,has the potential to be even more intuitive than ChatGPT in the future.
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw
 // @note         2023-2-21-v1.117 发布迁移到userscript以来第一个正式版本
 // @note         2016 Java -> 2019 Node.js -> 2023-2-09 各种各样的历史更新记录，从一个版本迭代到另一个版本
-// @updateURL    https://raw.githubusercontent.com/new4u/ViSearch/master/ViSearch.user.js
-// @downloadURL  https://raw.githubusercontent.com/new4u/ViSearch/master/ViSearch.user.js
 // @grant        none
 // ==/UserScript==
 // @require      https://d3js.org/d3.v6.min.js

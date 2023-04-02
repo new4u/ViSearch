@@ -6,7 +6,7 @@
 // @name:es    ViSearch/Google of Google
 // @name:th    ViSearch/Google of Google
 // @namespace    https://github.com/new4u
-// @version      4.117.2
+// @version      5.117
 // @description:zh-cn  Beyond the ChatGPT/AI with eyes
 // @description:zh-tw  Beyond the ChatGPT/AI with eyes
 // @description:fr  Beyond the ChatGPT/AI with eyes
@@ -241,7 +241,7 @@ function parseWebPage(Searchtext) {
         );
         abstract !== null ? (abstract = abstract.innerText) : (abstract = null);
 
-        let keyWords = Array.from(element.querySelectorAll(".qkunPe"));
+        let keyWords = Array.from(element.querySelectorAll(".t55VCb"));
         keyWords !== null
             ? (keyWords = keyWords.map((item) => {
             return item.innerText;

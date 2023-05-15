@@ -154,7 +154,8 @@ const colors = ["#6ca46c", "#4e88af", "#c72eca", "#d2907c"];
 const sizes = [30, 20, 20, 0.5];
 const forceRate = -1000;
 // 选择 input 元素中 class 为 gLFyf 的最后一个元素
-const input = document.querySelector("input.gLFyf:last-of-type");
+// const input = document.querySelector("input.gLFyf:last-of-type");  
+const input = document.querySelector("textarea.gLFyf:last-of-type"); //20230515根据google的代码更新searchtext的dom
 let searchtext = input ? input.value : "";
 if (searchtext === "") {
   console.log("searchtext is empty");

@@ -35,7 +35,6 @@
 // @note         2016 Java -> 2019 Node.js -> 2023-2-09 各种各样的历史更新记录，从一个版本迭代到另一个版本
 // @grant        none
 // ==/UserScript==
-// @require      https://d3js.org/d3.v6.min.js
 
 let styleSheet = `
 body {
@@ -163,7 +162,7 @@ if (searchtext === "") {
   console.log("searchtext:", searchtext);
   // 执行其他逻辑
 }
-
+// content.js
 function parseWebPage(Searchtext) {
   //data
   //***开始解析网页

@@ -225,8 +225,10 @@ function parseWebPage(Searchtext) {
       ".VwiC3b.yXK7lf.MUxGbd.yDYNvb.lyLwlc.lEBKkf span:nth-child(2)"
     );
     abstract !== null ? (abstract = abstract.innerText) : (abstract = null);
-
-    let keyWords = Array.from(element.querySelectorAll(".t55VCb"));
+    
+    
+    //搜索到关键词如果2023年05月25日更新到多语种
+    let keyWords = Array.from(element.querySelectorAll("em"));
     keyWords !== null
       ? (keyWords = keyWords.map((item) => {
           return item.innerText;

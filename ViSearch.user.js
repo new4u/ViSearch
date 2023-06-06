@@ -6,8 +6,8 @@
 // @name:es    ViSearch/Google of Google
 // @name:th    ViSearch/Google of Google
 // @namespace    https://github.com/new4u
-// @version      7.117.1
-// @description  Now:ViSearch on Chrome extensions **https://chrome.google.com/webstore/search/visearch** ! Beyond the ChatGPT/AI with eyes.ViSearch as the Free/Lightweight alternatives to ChatGPT,has the potential to be even more intuitive than ChatGPT in the future.
+// @version      7.117.2
+// @description  Now on Chrome extensions!!! **https://chrome.google.com/webstore/search/visearch** ! Beyond the ChatGPT/AI with eyes.ViSearch as the Free/Lightweight alternatives to ChatGPT,has the potential to be even more intuitive than ChatGPT in the future.
 // @description:zh-cn  Beyond the ChatGPT/AI with eyes Now:ViSearch on Chrome extensions https://chrome.google.com/webstore/search/visearch
 // @description:zh-tw  Beyond the ChatGPT/AI with eyes Now:ViSearch on Chrome extensions https://chrome.google.com/webstore/search/visearch
 // @description:fr  Beyond the ChatGPT/AI with eyes Now:ViSearch on Chrome extensions https://chrome.google.com/webstore/search/visearch

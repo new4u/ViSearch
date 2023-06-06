@@ -7,7 +7,6 @@
 // @name:th    ViSearch/Google of Google
 // @namespace    https://github.com/new4u
 // @version      7.117.1
-// @description        Beyond the ChatGPT/AI with eyes Now:ViSearch on Chrome extensions https://chrome.google.com/webstore/search/visearch
 // @description:zh-cn  Beyond the ChatGPT/AI with eyes Now:ViSearch on Chrome extensions https://chrome.google.com/webstore/search/visearch
 // @description:zh-tw  Beyond the ChatGPT/AI with eyes Now:ViSearch on Chrome extensions https://chrome.google.com/webstore/search/visearch
 // @description:fr  Beyond the ChatGPT/AI with eyes Now:ViSearch on Chrome extensions https://chrome.google.com/webstore/search/visearch
@@ -30,7 +29,7 @@
 // @grant        none
 // @copyright    2015-2023, new4u
 // @license      GPL-3.0-only
-// @description  Beyond the ChatGPT/AI with eyes.ViSearch as the Free/Lightweight alternatives to ChatGPT,has the potential to be even more intuitive than ChatGPT in the future.
+// @description  Now:ViSearch on Chrome extensions https://chrome.google.com/webstore/search/visearch! Beyond the ChatGPT/AI with eyes.ViSearch as the Free/Lightweight alternatives to ChatGPT,has the potential to be even more intuitive than ChatGPT in the future.
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw
 // @note         2023-05-25-v.7.117 发布到了chrome应用商店,并且修复了一个关键词和chrome界面语种的冲突,支持多语种.
 // @note         2023-2-21-v1.117 发布迁移到userscript以来第一个正式版本

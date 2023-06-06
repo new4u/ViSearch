@@ -6,12 +6,13 @@
 // @name:es    ViSearch/Google of Google
 // @name:th    ViSearch/Google of Google
 // @namespace    https://github.com/new4u
-// @version      7.117
-// @description:zh-cn  Beyond the ChatGPT/AI with eyes
-// @description:zh-tw  Beyond the ChatGPT/AI with eyes
-// @description:fr  Beyond the ChatGPT/AI with eyes
-// @description:es  Beyond the ChatGPT/AI with eyes
-// @description:th  Beyond the ChatGPT/AI with eyes
+// @version      7.117.1
+// @description        Beyond the ChatGPT/AI with eyes Now:ViSearch on Chrome extensions https://chrome.google.com/webstore/search/visearch
+// @description:zh-cn  Beyond the ChatGPT/AI with eyes Now:ViSearch on Chrome extensions https://chrome.google.com/webstore/search/visearch
+// @description:zh-tw  Beyond the ChatGPT/AI with eyes Now:ViSearch on Chrome extensions https://chrome.google.com/webstore/search/visearch
+// @description:fr  Beyond the ChatGPT/AI with eyes Now:ViSearch on Chrome extensions https://chrome.google.com/webstore/search/visearch
+// @description:es  Beyond the ChatGPT/AI with eyes Now:ViSearch on Chrome extensions https://chrome.google.com/webstore/search/visearch
+// @description:th  Beyond the ChatGPT/AI with eyes Now:ViSearch on Chrome extensions https://chrome.google.com/webstore/search/visearch
 // @author       new4u本爷有空
 // @connect    google.com
 // @connect    google.com.hk

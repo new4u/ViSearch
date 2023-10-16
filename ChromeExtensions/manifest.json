@@ -3,7 +3,7 @@
 
   "name": "ViSearch with Google",
   "description": "Google of Google...Beyond the ChatGPT/AI with eyes",
-  "version": "1.6.217",
+  "version": "1.8.117",
   "manifest_version": 3,
   "icons": {
     "16": "/images/icon16.png",

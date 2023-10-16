@@ -22,7 +22,7 @@
 // @name:es    ViSearch/Google of Google
 // @name:th    ViSearch/Google of Google
 // @namespace    https://github.com/new4u
-// @version      6.217
+// @version      7.217
 // @description:zh-cn  Beyond the ChatGPT/AI with eyes
 // @description:zh-tw  Beyond the ChatGPT/AI with eyes
 // @description:fr  Beyond the ChatGPT/AI with eyes
@@ -47,11 +47,11 @@
 // @license      GPL-3.0-only
 // @description  Beyond the ChatGPT/AI with eyes.ViSearch as the Free/Lightweight alternatives to ChatGPT,has the potential to be even more intuitive than ChatGPT in the future.
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw
+// @note         2023-05-25-v.7.117 发布到了chrome应用商店,并且修复了一个关键词和chrome界面语种的冲突,支持多语种.
 // @note         2023-2-21-v1.117 发布迁移到userscript以来第一个正式版本
 // @note         2016 Java -> 2019 Node.js -> 2023-2-09 各种各样的历史更新记录，从一个版本迭代到另一个版本
 // @grant        none
 // ==/UserScript==
-// @require      https://d3js.org/d3.v6.min.js
 
 let styleSheet = `
 body {
@@ -227,7 +227,8 @@ function parseWebPage(Searchtext) {
     );
     abstract !== null ? (abstract = abstract.innerText) : (abstract = null);
 
-    let keyWords = Array.from(element.querySelectorAll(".t55VCb"));
+    //搜索到关键词如果2023年05月25日更新到多语种
+    let keyWords = Array.from(element.querySelectorAll("em"));
     keyWords !== null
       ? (keyWords = keyWords.map((item) => {
           return item.innerText;
@@ -741,13 +742,58 @@ const graph = document.getElementById("svg");
 const width = parseInt(graph.style.width);
 const height = parseInt(graph.style.height);
 
-// Parse the web page context and get the nodes and links data
+if (searchtext === "") {
+  console.log("不是google或者没有searchtext");
+//   let searchtext ="ViSearch is a Google search results enhancement extension."
+//   const sample = {"nodes":[{"category":1,"id":"news","name":"visearch new4u top","value":0,"type":"news","index":0,"x":250,"y":250,"vy":0,"vx":0,"fx":250,"fy":250 },{"category":3,"id":"key0","name":"new4u","value":"30000","type":"key","index":1,"x":220.8819601820255,"y":314.90119328515595,"vy":-0.0029702389980556737,"vx":-0.0013971904302029295 },{"category":3,"id":"key1","name":"ViSearch","value":"30001","type":"key","index":2,"x":242.15746997850403,"y":160.53388262330634,"vy":-0.0022288155870392387,"vx":0.000724396243487838 },{"category":3,"id":"key2","name":"top","value":"30002","type":"key","index":3,"x":321.94827419334445,"y":343.40911485064515,"vy":-0.00016416628485374662,"vx":-0.0004934226395911182 },{"category":4,"id":"san0","name":"Issues · new4u/ViSearch - GitHub","value":null,"origin":"GitHub","time":null,"year":null,"url":"https://github.com/new4u/ViSearch/issues","keyWords":["new4u","ViSearch"],"type":"san","index":4,"x":165.83983210992497,"y":231.5341359457681,"vy":-0.003028695782835303,"vx":-0.00021534442969740346 },{"category":4,"id":"san1","name":"ViSearch with Google Chrome extension","value":"ViSearch with Google is a Chrome extension by new4u. This extension has 12 weekly active users,a perfect 5.0 rating,and is most similar to ...","time":"2023年5月26日","year":"2023","url":"https://chrome-stats.com/d/mnhdcngdkimhejdmhihhncebpanbccil","keyWords":["ViSearch","new4u"],"type":"san","index":5,"x":275.0424285197011,"y":213.1782525929967,"vy":-0.0013129169237991515,"vx":-0.0007791546698188358 },{"category":4,"id":"san2","name":"ViSearch/Google of Google[Beta version]...Beyond the AI with ...","value":"Introducing ViSearch:The Low-Carbon AI Assistant The Most Intuitive and Low-Carbon AI Assistant Today,ViSearch has migrated to the plugin ...","time":"2023年2月9日","year":"2023","url":"https://www.youtube.com/watch?v=wuQELy6nTjk","keyWords":["ViSearch","ViSearch"],"type":"san","index":6,"x":209.54033157753807,"y":67.37150428466128,"vy":-0.004551744083327162,"vx":0.006916094333669629 },{"category":4,"id":"san3","name":"免费试用，完美解决GPT-4的Token费用问题，专业Al玩家必备！","value":"CustomGPT:https://customgpt.ai/?fpr=homepage 使用优惠码ONEMONTHOFF，可得一个月免费使用 定制聊天机器人:https://customgpt.new4u.top/  ...","time":"2023年5月22日","year":"2023","url":"https://www.youtube.com/watch?v=OaQ6rrRncgk","keyWords":["new4u","top"],"type":"san","index":7,"x":258.4407771559011,"y":404.8905116306859,"vy":-0.0017527364397468984,"vx":-0.001612180920836246 },{"category":4,"id":"san4","name":"User scripts - Greasy Fork","value":null,"origin":"Greasy Fork","time":null,"year":null,"url":"https://greasyfork.org/en/scripts?q=today%27s&sort=daily_installs","keyWords":["ViSearch","new4u","ViSearch","new4u","top"],"type":"san","index":8,"x":306.1510018673872,"y":264.162268448693,"vy":-0.0008889408293049402,"vx":-0.0013104738304510492 }],"links":[{"source":{"category":3,"id":"key0","name":"new4u","value":"30000","type":"key","index":1,"x":220.8819601820255,"y":314.90119328515595,"vy":-0.0029702389980556737,"vx":-0.0013971904302029295 },"target":{"category":4,"id":"san0","name":"Issues · new4u/ViSearch - GitHub","value":null,"origin":"GitHub","time":null,"year":null,"url":"https://github.com/new4u/ViSearch/issues","keyWords":["new4u","ViSearch"],"type":"san","index":4,"x":165.83983210992497,"y":231.5341359457681,"vy":-0.003028695782835303,"vx":-0.00021534442969740346 },"value":1,"index":0 },{"source":{"category":3,"id":"key0","name":"new4u","value":"30000","type":"key","index":1,"x":220.8819601820255,"y":314.90119328515595,"vy":-0.0029702389980556737,"vx":-0.0013971904302029295 },"target":{"category":4,"id":"san1","name":"ViSearch with Google Chrome extension","value":"ViSearch with Google is a Chrome extension by new4u. This extension has 12 weekly active users,a perfect 5.0 rating,and is most similar to ...","time":"2023年5月26日","year":"2023","url":"https://chrome-stats.com/d/mnhdcngdkimhejdmhihhncebpanbccil","keyWords":["ViSearch","new4u"],"type":"san","index":5,"x":275.0424285197011,"y":213.1782525929967,"vy":-0.0013129169237991515,"vx":-0.0007791546698188358 },"value":1,"index":1 },{"source":{"category":3,"id":"key0","name":"new4u","value":"30000","type":"key","index":1,"x":220.8819601820255,"y":314.90119328515595,"vy":-0.0029702389980556737,"vx":-0.0013971904302029295 },"target":{"category":4,"id":"san3","name":"免费试用，完美解决GPT-4的Token费用问题，专业Al玩家必备！","value":"CustomGPT:https://customgpt.ai/?fpr=homepage 使用优惠码ONEMONTHOFF，可得一个月免费使用 定制聊天机器人:https://customgpt.new4u.top/  ...","time":"2023年5月22日","year":"2023","url":"https://www.youtube.com/watch?v=OaQ6rrRncgk","keyWords":["new4u","top"],"type":"san","index":7,"x":258.4407771559011,"y":404.8905116306859,"vy":-0.0017527364397468984,"vx":-0.001612180920836246 },"value":1,"index":2 },{"source":{"category":3,"id":"key0","name":"new4u","value":"30000","type":"key","index":1,"x":220.8819601820255,"y":314.90119328515595,"vy":-0.0029702389980556737,"vx":-0.0013971904302029295 },"target":{"category":4,"id":"san4","name":"User scripts - Greasy Fork","value":null,"origin":"Greasy Fork","time":null,"year":null,"url":"https://greasyfork.org/en/scripts?q=today%27s&sort=daily_installs","keyWords":["ViSearch","new4u","ViSearch","new4u","top"],"type":"san","index":8,"x":306.1510018673872,"y":264.162268448693,"vy":-0.0008889408293049402,"vx":-0.0013104738304510492 },"value":1,"index":3 },{"source":{"category":3,"id":"key1","name":"ViSearch","value":"30001","type":"key","index":2,"x":242.15746997850403,"y":160.53388262330634,"vy":-0.0022288155870392387,"vx":0.000724396243487838 },"target":{"category":4,"id":"san0","name":"Issues · new4u/ViSearch - GitHub","value":null,"origin":"GitHub","time":null,"year":null,"url":"https://github.com/new4u/ViSearch/issues","keyWords":["new4u","ViSearch"],"type":"san","index":4,"x":165.83983210992497,"y":231.5341359457681,"vy":-0.003028695782835303,"vx":-0.00021534442969740346 },"value":1,"index":4 },{"source":{"category":3,"id":"key1","name":"ViSearch","value":"30001","type":"key","index":2,"x":242.15746997850403,"y":160.53388262330634,"vy":-0.0022288155870392387,"vx":0.000724396243487838 },"target":{"category":4,"id":"san1","name":"ViSearch with Google Chrome extension","value":"ViSearch with Google is a Chrome extension by new4u. This extension has 12 weekly active users,a perfect 5.0 rating,and is most similar to ...","time":"2023年5月26日","year":"2023","url":"https://chrome-stats.com/d/mnhdcngdkimhejdmhihhncebpanbccil","keyWords":["ViSearch","new4u"],"type":"san","index":5,"x":275.0424285197011,"y":213.1782525929967,"vy":-0.0013129169237991515,"vx":-0.0007791546698188358 },"value":1,"index":5 },{"source":{"category":3,"id":"key1","name":"ViSearch","value":"30001","type":"key","index":2,"x":242.15746997850403,"y":160.53388262330634,"vy":-0.0022288155870392387,"vx":0.000724396243487838 },"target":{"category":4,"id":"san2","name":"ViSearch/Google of Google[Beta version]...Beyond the AI with ...","value":"Introducing ViSearch:The Low-Carbon AI Assistant The Most Intuitive and Low-Carbon AI Assistant Today,ViSearch has migrated to the plugin ...","time":"2023年2月9日","year":"2023","url":"https://www.youtube.com/watch?v=wuQELy6nTjk","keyWords":["ViSearch","ViSearch"],"type":"san","index":6,"x":209.54033157753807,"y":67.37150428466128,"vy":-0.004551744083327162,"vx":0.006916094333669629 },"value":1,"index":6 },{"source":{"category":3,"id":"key1","name":"ViSearch","value":"30001","type":"key","index":2,"x":242.15746997850403,"y":160.53388262330634,"vy":-0.0022288155870392387,"vx":0.000724396243487838 },"target":{"category":4,"id":"san4","name":"User scripts - Greasy Fork","value":null,"origin":"Greasy Fork","time":null,"year":null,"url":"https://greasyfork.org/en/scripts?q=today%27s&sort=daily_installs","keyWords":["ViSearch","new4u","ViSearch","new4u","top"],"type":"san","index":8,"x":306.1510018673872,"y":264.162268448693,"vy":-0.0008889408293049402,"vx":-0.0013104738304510492 },"value":1,"index":7 },{"source":{"category":3,"id":"key2","name":"top","value":"30002","type":"key","index":3,"x":321.94827419334445,"y":343.40911485064515,"vy":-0.00016416628485374662,"vx":-0.0004934226395911182 },"target":{"category":4,"id":"san3","name":"免费试用，完美解决GPT-4的Token费用问题，专业Al玩家必备！","value":"CustomGPT:https://customgpt.ai/?fpr=homepage 使用优惠码ONEMONTHOFF，可得一个月免费使用 定制聊天机器人:https://customgpt.new4u.top/  ...","time":"2023年5月22日","year":"2023","url":"https://www.youtube.com/watch?v=OaQ6rrRncgk","keyWords":["new4u","top"],"type":"san","index":7,"x":258.4407771559011,"y":404.8905116306859,"vy":-0.0017527364397468984,"vx":-0.001612180920836246 },"value":1,"index":8 },{"source":{"category":3,"id":"key2","name":"top","value":"30002","type":"key","index":3,"x":321.94827419334445,"y":343.40911485064515,"vy":-0.00016416628485374662,"vx":-0.0004934226395911182 },"target":{"category":4,"id":"san4","name":"User scripts - Greasy Fork","value":null,"origin":"Greasy Fork","time":null,"year":null,"url":"https://greasyfork.org/en/scripts?q=today%27s&sort=daily_installs","keyWords":["ViSearch","new4u","ViSearch","new4u","top"],"type":"san","index":8,"x":306.1510018673872,"y":264.162268448693,"vy":-0.0008889408293049402,"vx":-0.0013104738304510492 },"value":1,"index":9 },{"source":{"category":1,"id":"news","name":"visearch new4u top","value":0,"type":"news","index":0,"x":250,"y":250,"vy":0,"vx":0,"fx":250,"fy":250 },"target":{"category":3,"id":"key0","name":"new4u","value":"30000","type":"key","index":1,"x":220.8819601820255,"y":314.90119328515595,"vy":-0.0029702389980556737,"vx":-0.0013971904302029295 },"value":1,"index":10 },{"source":{"category":1,"id":"news","name":"visearch new4u top","value":0,"type":"news","index":0,"x":250,"y":250,"vy":0,"vx":0,"fx":250,"fy":250 },"target":{"category":3,"id":"key1","name":"ViSearch","value":"30001","type":"key","index":2,"x":242.15746997850403,"y":160.53388262330634,"vy":-0.0022288155870392387,"vx":0.000724396243487838 },"value":1,"index":11 },{"source":{"category":1,"id":"news","name":"visearch new4u top","value":0,"type":"news","index":0,"x":250,"y":250,"vy":0,"vx":0,"fx":250,"fy":250 },"target":{"category":3,"id":"key2","name":"top","value":"30002","type":"key","index":3,"x":321.94827419334445,"y":343.40911485064515,"vy":-0.00016416628485374662,"vx":-0.0004934226395911182 },"value":1,"index":12 }]}
+//   const nodes = sample.nodes;
+//   const links = sample.links;
+
+// // Render the D3 graph on the div element
+// renderD3Graph(nodes, links, graph);
+var text = "";
+text += "<p>即将支持本页面的可视化……<br/>Coming soon on supporting visualizations on this page...<br/>目前支持:谷歌搜索<br/>Supported:Google search<br/>已经在排期的可视化项目：百度、Bing、维基。<br/>Visualization projects already scheduled: Baidu, Bing, wiki<br/>Github: <a href=\"https://github.com/new4u/ViSearch\">https://github.com/new4u/ViSearch</a><br/>个人网站 About me: <a href=\"https://www.new4u.top/\">https://www.new4u.top</a></p>";
+text += "";
+text += "<h3>ViSearch 插件</h3>";
+text += "";
+text += "<p>ViSearch 是一款 Google 搜索结果增强插件。它可以使你在 Google 搜索结果页面直接浏览图片，并且可以使用“Visually Similar Images”功能查找相似图片。如果你不是用 Google 搜索，可能需要手动开启ViSearch插件。</p>";
+text += "";
+text += "<p>使用方法：</p>";
+text += "";
+text += "<ol><li>在 Google 搜索结果页面下，点击插件图标。</li><li>图片搜索：在想要搜索的图片上右键点击，选择“Search Visually Similar Images”。</li><li>搜索结果页面：点击“Visually Similar Images”按钮可以快速查找与搜索结果相似的图片。</li></ol>";
+text += "";
+text += "<p>未来愿景：</p>";
+text += "";
+text += "<p>我们的愿景是使 ViSearch 成为一个全球范围内最受欢迎的搜索结果增强插件。我们希望 ViSearch 能够为用户提供更好的搜索体验，帮助他们更轻松地找到他们需要的信息。同时，我们会不断优化 ViSearch，让它更加智能，更加易用。</p>";
+text += "";
+text += "<h3>ViSearch Extension</h3>";
+text += "";
+text += "<p>ViSearch is a Google search results enhancement extension. It allows you to browse images directly on the Google search results page and use the &quot;Visually Similar Images&quot; function to find similar images. If you are not using Google search, you may need to manually enable the ViSearch extension.</p>";
+text += "";
+text += "<p>Usage:</p>";
+text += "";
+text += "<ol><li>On the Google search results page, click the extension icon.</li><li>Image search: Right-click on the picture you want to search and choose &quot;Search Visually Similar Images&quot;.</li><li>Search results page: Click the &quot;Visually Similar Images&quot; button to quickly find images similar to the search results.</li></ol>";
+text += "";
+text += "<p>Future vision:</p>";
+text += "";
+text += "<p>Our vision is to make ViSearch the most popular search results enhancement extension globally. We hope that ViSearch can provide users with a better search experience and help them find the information they need more easily. At the same time, we will continue to optimize ViSearch to make it smarter and more user-friendly.</p>";
+
+
+graph.innerHTML=text
+} else {
+  console.log("既是google也有searchtext:", searchtext);
+
+  // 执行其他逻辑
+  // Parse the web page context and get the nodes and links data
 const data = parseWebPage(searchtext);
 const nodes = data.nodes;
 const links = data.links;
 
 // Render the D3 graph on the div element
 renderD3Graph(nodes, links, graph);
+
+}
+
 
     
     

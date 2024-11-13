@@ -6,7 +6,7 @@
   <b>Click to watch the video on YouTube</b></p>
 </p>
 
-
+<a href="https://www.buymeacoffee.com/new4u" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
 
 # Introducing ViSearch: The Low-Carbon AI Assistant
 
